@@ -1,13 +1,12 @@
-package figuras;
+package figuras.interfaces;
 
 /**
- * @author Luis Treviño
+ * @author Luis Treviï¿½o
  * 
  * Interfaz figura representa todas la figuras en 2 dimensiones
  * 
  */
 
-import java.awt.Graphics2D;
 import basicas.Punto;
 
 
@@ -42,9 +41,6 @@ public interface Figura {
 	
 	//Circulo o rectangulo que envuelve a la figura
 	public Figura figuraQueEnvuelve();
-	
-	//Dibuja la figura en un Graphics2D g
-	public void dibuja(Graphics2D g);
 	
 	//Devuelve el area de la figura.
 	public double area();

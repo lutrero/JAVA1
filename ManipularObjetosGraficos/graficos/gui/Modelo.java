@@ -1,6 +1,6 @@
 package gui;
 
-import figuras.Figura;
+import figuras.interfaces.FiguraDibujable;
 
 import java.awt.Graphics2D;
 import java.util.Vector;
@@ -15,7 +15,7 @@ public interface Modelo {
 	public void setPosicion(double dx, double dy);
 	public void setEscalado(double factor, double ref);
 	public void actualizaPosicion(Punto p);
-	public void addFigura(Figura f);
+	public void addFigura(FiguraDibujable f);
 	public void dibujar(Seleccion s, Graphics2D g);
 	public Seleccion getSeleccion();
 	public Vector<Seleccion> getVectorFiguras();

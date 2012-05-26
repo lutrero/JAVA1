@@ -1,8 +1,7 @@
-package figuras.extra;
+package figuras.interfaces;
 
-import java.awt.Graphics2D;
 
-import basicas.Punto;
+
 
 public interface Observable {
 	
@@ -16,17 +15,6 @@ public interface Observable {
 	
 	public void notificarObservadores();
 	
-	public void rotar(double ang);
-	
-	public void escalar(double f);
-	
-	public Punto getOrigen();
-	
-	public void dibuja(Graphics2D g);
-	public void dibujaEnvoltura(Graphics2D g);
-	
-	public void mover(double x, double y);
-	public void mover(Punto p);
 	
 	public String [] getData();
 }

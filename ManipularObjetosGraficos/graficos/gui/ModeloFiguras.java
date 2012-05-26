@@ -1,10 +1,10 @@
 package gui;
 
-import figuras.Figura;
 import figuras.extra.FiguraExtendida;
 import figuras.extra.SeleccionEnvoltura;
 import figuras.extra.SeleccionNormal;
-import figuras.extra.Seleccionable;
+import figuras.interfaces.FiguraDibujable;
+import figuras.interfaces.Seleccionable;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -131,7 +131,7 @@ public class ModeloFiguras implements Modelo {
 	}
 
 	@Override
-	public synchronized void addFigura(Figura f) {
+	public synchronized void addFigura(FiguraDibujable f) {
 		vectorFiguras.add(new Seleccion(new FiguraExtendida(f),(int) f.getOrigen().getX(), (int)f.getOrigen().getY(), 0, 1));
 		vista.repintar();
 	}

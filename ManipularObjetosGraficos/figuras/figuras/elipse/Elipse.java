@@ -1,15 +1,13 @@
 package figuras.elipse;
 
 /**
- * @author Luis Treviño
+ * @author Luis Treviï¿½o
  * 
  * Clase que representa una elipse mediante sus focos y la suma de la distancai de los
  * mismos a los puntos del perimetro.
  * Implementa el intefaz Figura.
  */
 
-
-import java.awt.Graphics2D;
 
 import figuras.FiguraAbstracta;
 import figuras.Rectangulo;
@@ -47,6 +45,13 @@ public class Elipse extends FiguraAbstracta{
 		}else{
 			throw new NullPointerException("Los focos no pueden ser null.");
 		}
+	}
+	
+	public Elipse(Elipse e){
+		super(e.getAngulo());
+		f1 = new Punto(e.getOrigen());
+		f2 = new Punto(e.getFoco2());
+		cuerda = e.getCuerda();
 	}
 	
 	public Punto getFoco2(){
@@ -131,10 +136,6 @@ public class Elipse extends FiguraAbstracta{
 		return this;
 	}
 	
-	@Override
-	public void dibuja(Graphics2D g) {
-		DibujaElipse.dibujarElipse(this, g);
-	}
 	
 	@Override
 	public int hashCode() {

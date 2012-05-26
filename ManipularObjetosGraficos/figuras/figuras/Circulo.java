@@ -1,17 +1,14 @@
 package figuras;
 
 /**
- * @author Luis Treviño
+ * @author Luis Treviï¿½o
  * 
  * Clase que representa un circulo mediate una elipse, implementa el interfaz Figura.
  */
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
 
 import figuras.elipse.Elipse;
+import figuras.interfaces.Figura;
 
 import basicas.Punto;
 
@@ -30,8 +27,17 @@ public class Circulo implements Figura {
 		circulo = new Elipse(centro,centro,2*radio);
 	}
 	
+	public Circulo(Circulo c){
+		super();
+		circulo = new Elipse(c.getCirculo());
+	}
+	
 	public  double getRadio(){
 		return circulo.getCuerda()/2;
+	}
+	
+	protected Elipse getCirculo(){
+		return circulo;
 	}
 	
 	@Override
@@ -83,17 +89,6 @@ public class Circulo implements Figura {
 	@Override
 	public Punto getOrigen() {
 		return circulo.getOrigen();
-	}
-
-	@Override
-	public void dibuja(Graphics2D g) {
-		if (g == null) throw new NullPointerException();
-		double diametro  = circulo.getCuerda();
-		Shape s = new Ellipse2D.Double(circulo.getOrigen().getX() - diametro/2, circulo.getOrigen().getY() - diametro/2, diametro, diametro);
-		if (! g.getColor().equals(Color.WHITE))
-			g.setColor(Color.YELLOW);
-		g.draw(s);	
-		g.setColor(Color.BLACK);
 	}
 	
 	@Override

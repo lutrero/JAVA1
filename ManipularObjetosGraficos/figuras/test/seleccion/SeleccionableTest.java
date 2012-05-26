@@ -7,15 +7,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import basicas.Punto;
-
-import figuras.Circulo;
-import figuras.Rectangulo;
-import figuras.elipse.Elipse;
+import figuras.CirculoDibujable;
+import figuras.RectanguloDibujable;
+import figuras.elipse.ElipseDibujable;
 import figuras.extra.FiguraExtendida;
 import figuras.extra.SeleccionEnvoltura;
 import figuras.extra.SeleccionPerimetro;
-import figuras.extra.Seleccionable;
-import figuras.triangulo.Triangulo;
+import figuras.interfaces.Seleccionable;
+import figuras.triangulo.TrianguloDibujable;
 
 public class SeleccionableTest {
 
@@ -26,10 +25,10 @@ public class SeleccionableTest {
 	
 	@Before
 	public void init(){
-		s = new FiguraExtendida(new Circulo(new Punto(), 5));
-		s2 = new FiguraExtendida(new Rectangulo(new Punto(), 5, 3, 0));
-		s3 = new FiguraExtendida(new Elipse(new Punto(), new Punto(3, 0), 4));
-		s4 = new FiguraExtendida(new Triangulo(new Punto(0, 0), new Punto(3, 3), new Punto(5, 1)));
+		s = new FiguraExtendida(new CirculoDibujable(new Punto(), 5));
+		s2 = new FiguraExtendida(new RectanguloDibujable(new Punto(), 5, 3, 0));
+		s3 = new FiguraExtendida(new ElipseDibujable(new Punto(), new Punto(3, 0), 4));
+		s4 = new FiguraExtendida(new TrianguloDibujable(new Punto(0, 0), new Punto(3, 3), new Punto(5, 1)));
 	}
 	
 	@Test
@@ -68,7 +67,7 @@ public class SeleccionableTest {
 		assertTrue(s.seleccionar(new Punto(0, 5)));
 		assertTrue(s.seleccionar(new Punto(-5.0000000000000001, 0)));//luis: Es que es en el 16!!!
 		assertTrue(s.seleccionar(new Punto(-5.0000000000000004440892, 0)));
-		assertTrue(s.seleccionar(new Punto(-5.0000000000000004440892, -4.9999999999999995559107901)));//luis: ¿Deberia redondear o una tolerancia del orden de -15 o algo?
+		assertTrue(s.seleccionar(new Punto(-5.0000000000000004440892, -4.9999999999999995559107901)));//luis: ï¿½Deberia redondear o una tolerancia del orden de -15 o algo?
 		assertTrue(s.seleccionar(new Punto(4, 5)));
 		assertTrue(s.seleccionar(new Punto(-5, 5)));
 		assertTrue(s.seleccionar(new Punto(4.9, 4.9)));

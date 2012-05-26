@@ -2,16 +2,13 @@ package figuras.triangulo;
 
 
 /**
- *@author Luis Treviño
+ *@author Luis Treviï¿½o
  *
  * Clase que representa un triangulo mediante sus vertices.
  * Implementa el interfaz Figura
  */
 
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
 
 import figuras.Circulo;
 import figuras.FiguraAbstracta;
@@ -155,16 +152,6 @@ public class Triangulo extends FiguraAbstracta{
 	@Override
 	public String toString() {
 		return "[a=" + a + ", b=" + b + ", c=" + c + "]";
-	}
-
-	@Override
-	public void dibuja(Graphics2D g) {
-		if (g == null) throw new NullPointerException();
-		g.setColor(Color.MAGENTA);
-		g.draw(new Line2D.Double(a.getX(), a.getY(), b.getX(), b.getY()));
-		g.draw(new Line2D.Double(b.getX(), b.getY(), c.getX(), c.getY()));
-		g.draw(new Line2D.Double(a.getX(), a.getY(), c.getX(), c.getY()));
-		g.setColor(Color.BLACK);
 	}
 
 	@Override

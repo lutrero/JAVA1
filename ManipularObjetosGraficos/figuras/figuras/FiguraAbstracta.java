@@ -1,8 +1,10 @@
 package figuras;
 
+import figuras.interfaces.Figura;
+
 /**
  * 
- * @author Luis Treviño
+ * @author Luis Treviï¿½o
  *
  *Clase abstracta que mantiene los atributos comunes a todas la figuras en este caso el angulo.
  */

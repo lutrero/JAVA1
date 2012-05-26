@@ -4,12 +4,14 @@ import java.awt.Graphics2D;
 import java.util.List;
 import java.util.Vector;
 
-import figuras.Figura;
+import figuras.interfaces.FiguraDibujable;
+import figuras.interfaces.FiguraGrafica;
+import figuras.interfaces.Observador;
 import basicas.Punto;
 
-public final class FiguraExtendida implements Seleccionable, Observable {
+public final class FiguraExtendida implements FiguraGrafica {
 	
-	private Figura figura;
+	private FiguraDibujable figura;
 	private CriterioSeleccion criterioS;
 	private List<Observador> observadores;
 	private List<Observador> observadoresRotar;
@@ -17,11 +19,11 @@ public final class FiguraExtendida implements Seleccionable, Observable {
 	private List<Observador> observadoresMover;
 	private String [] datos;
 	
-	public FiguraExtendida(Figura figura){
+	public FiguraExtendida(FiguraDibujable figura){
 		this(figura, new SeleccionNormal());
 	}
 
-	public FiguraExtendida(Figura figura, CriterioSeleccion criterioS) {
+	public FiguraExtendida(FiguraDibujable figura, CriterioSeleccion criterioS) {
 		super();
 		this.figura = figura;
 		this.criterioS = criterioS;
@@ -114,7 +116,7 @@ public final class FiguraExtendida implements Seleccionable, Observable {
 
 	@Override
 	public void dibujaEnvoltura(Graphics2D g) {
-		figura.figuraQueEnvuelve().dibuja(g);
+		figura.dibujaEnvoltura(g);
 	}
 	
 }

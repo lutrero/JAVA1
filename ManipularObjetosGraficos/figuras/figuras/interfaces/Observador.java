@@ -1,4 +1,4 @@
-package figuras.extra;
+package figuras.interfaces;
 
 public interface Observador {
 

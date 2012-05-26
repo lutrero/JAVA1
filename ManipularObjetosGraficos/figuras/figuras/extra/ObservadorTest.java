@@ -1,18 +1,21 @@
 package figuras.extra;
 
-import figuras.Circulo;
-import figuras.Rectangulo;
-import figuras.elipse.Elipse;
-import figuras.triangulo.Triangulo;
+import figuras.CirculoDibujable;
+import figuras.RectanguloDibujable;
+import figuras.elipse.ElipseDibujable;
+import figuras.interfaces.FiguraGrafica;
+import figuras.interfaces.Observable;
+import figuras.interfaces.Observador;
+import figuras.triangulo.TrianguloDibujable;
 
 public class ObservadorTest {
 
 	
 	public static void main(String[] args) {
-		Observable rectangulo = new FiguraExtendida(new Rectangulo());
-		Observable circulo = new FiguraExtendida(new Circulo());
-		Observable triangulo = new FiguraExtendida(new Triangulo());
-		Observable elipse = new FiguraExtendida(new Elipse());
+		FiguraGrafica rectangulo = new FiguraExtendida(new RectanguloDibujable());
+		FiguraGrafica circulo = new FiguraExtendida(new CirculoDibujable());
+		FiguraGrafica triangulo = new FiguraExtendida(new TrianguloDibujable());
+		FiguraGrafica elipse = new FiguraExtendida(new ElipseDibujable());
 		Observador oEscalarRe = new ObservadorEscalar(rectangulo);
 		Observador oEscalarRe2 = new ObservadorEscalar(rectangulo);
 		Observador oEscalarEl = new ObservadorEscalar(elipse);

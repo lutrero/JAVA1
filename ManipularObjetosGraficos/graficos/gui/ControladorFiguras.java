@@ -1,6 +1,6 @@
 package gui;
 
-import figuras.Figura;
+import figuras.interfaces.FiguraDibujable;
 
 import java.awt.Graphics2D;
 
@@ -62,7 +62,7 @@ public class ControladorFiguras implements Controlador{
 	}
 
 	@Override
-	public void solicitaNueva(Figura f) {
+	public void solicitaNueva(FiguraDibujable f) {
 		modelo.addFigura(vista.getFigura());
 	}
 }

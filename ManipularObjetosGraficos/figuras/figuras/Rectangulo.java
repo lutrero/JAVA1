@@ -1,8 +1,6 @@
 package figuras;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.Line2D;
+
 
 import figuras.elipse.Elipse;
 import figuras.triangulo.Triangulo;
@@ -13,7 +11,7 @@ import basicas.Punto;
 
 /**
  * 
- * @author Luis Treviño Romojaro
+ * @author Luis Treviï¿½o Romojaro
  * Clase que representa un rectangulo rotable y dibujable, esta representada por uno de sus vertices,
  * el ancho, el alto y su angulo de rotacion implementa el interfaz Figura.
  *
@@ -40,6 +38,13 @@ public class Rectangulo extends FiguraAbstracta{
 		this.origen = origen;
 		this.ancho = ancho;
 		this.alto = alto;
+	}
+	
+	public Rectangulo(Rectangulo r){
+		super(r.getAngulo());
+		origen = r.getOrigen();
+		ancho = r.getAncho();
+		alto = r.getAlto();
 	}
 
 	public Punto getOrigen() {
@@ -124,19 +129,7 @@ public class Rectangulo extends FiguraAbstracta{
 		p = p.getPunto(alto/2, angulo + Math.toRadians(90));
 		return new Circulo(p, origen.distancia(p));
 	}
-	
-	@Override
-	public void dibuja(Graphics2D g) {
-		if (g == null) throw new NullPointerException();
-		Punto [] puntos = obtenerPuntos();
-		if (! g.getColor().equals(Color.WHITE))
-			g.setColor(Color.GREEN);
-		g.draw(new Line2D.Double(puntos[0].getX(), puntos[0].getY(), puntos[1].getX(), puntos[1].getY()));
-		g.draw(new Line2D.Double(puntos[0].getX(), puntos[0].getY(), puntos[2].getX(), puntos[2].getY()));
-		g.draw(new Line2D.Double(puntos[1].getX(), puntos[1].getY(), puntos[3].getX(), puntos[3].getY()));
-		g.draw(new Line2D.Double(puntos[3].getX(), puntos[3].getY(), puntos[2].getX(), puntos[2].getY()));
-		g.setColor(Color.BLACK);
-	}
+
 	
 	@Override
 	public String toString() {
@@ -174,7 +167,7 @@ public class Rectangulo extends FiguraAbstracta{
 		return true;
 	}
 	
-	private Punto[] obtenerPuntos(){
+	protected Punto[] obtenerPuntos(){
 		Punto [] puntos = new Punto[4];
 		puntos[0] = origen;
 		puntos[1] = origen.getPunto(ancho, angulo);

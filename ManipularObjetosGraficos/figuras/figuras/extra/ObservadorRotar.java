@@ -1,5 +1,8 @@
 package figuras.extra;
 
+import figuras.interfaces.Observable;
+import figuras.interfaces.Observador;
+
 public class ObservadorRotar implements Observador {
 
 	

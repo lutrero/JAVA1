@@ -3,7 +3,7 @@ package gui;
 
 import java.awt.Container;
 
-import figuras.Figura;
+import figuras.interfaces.FiguraDibujable;
 
 import basicas.Punto;
 
@@ -14,13 +14,12 @@ public interface Vista {
 	public void repintar();
 	
 	public Container getContenedor();
-	public double getRotacion();
-	public Integer getPosicionX();
-	public Integer getPosicionY();
-	public double getEscalado();
+//	public double getRotacion();
+//	public Integer getPosicionX();
+//	public Integer getPosicionY();
+//	public double getEscalado();
 	public void setSliders(Punto p);
-	public Figura getFigura();
+	public FiguraDibujable getFigura();
 	
-	//Interacciona con el user,  Crea gui
 
 }

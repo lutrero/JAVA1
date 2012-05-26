@@ -1,6 +1,6 @@
 package figuras.extra;
 
-import figuras.Figura;
+import figuras.interfaces.Figura;
 import basicas.Punto;
 
 public final class SeleccionNormal implements CriterioSeleccion{

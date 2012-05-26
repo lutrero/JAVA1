@@ -1,5 +1,6 @@
-package figuras.extra;
+package figuras.interfaces;
 
+import figuras.extra.CriterioSeleccion;
 import basicas.Punto;
 
 public interface Seleccionable {
