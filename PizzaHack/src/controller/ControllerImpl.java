@@ -11,10 +11,12 @@ public class ControllerImpl implements Controller {
 		super();
 	}
 
+	@Override
 	public void setModel(Model model) {
 		this.model = model;
 	}
 	
+	@Override
 	public void setView(View view) {
 		this.view = view;
 	}

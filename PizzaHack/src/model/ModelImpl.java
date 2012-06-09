@@ -15,6 +15,7 @@ public class ModelImpl implements Model {
 		vFiguras = new Vector<FigurePanel>();
 	}
 
+	@Override
 	public void setView(View view) {
 		this.view = view;
 	}

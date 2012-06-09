@@ -10,12 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -34,23 +36,38 @@ public class ViewImpl implements View {
 	public ViewImpl() {
 		super();
 	}
-
+	
+	@Override
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 	
+	@Override
 	public void setModel(Model model) {
 		this.model = model;
 	}
 	
 	public final void createGUI() {
-		mainWindow = new JFrame("Some figures");
-		Container container = mainWindow.getContentPane();
-		canvas = new Canvas();
-		container.add(canvas);
-		JPanel components = createComponents();
-		container.add(components, BorderLayout.EAST);
-		showWindow();
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				
+				@Override
+				public void run() {
+					mainWindow = new JFrame("Some figures");
+					Container container = mainWindow.getContentPane();
+					canvas = new Canvas();
+					container.add(canvas);
+					JPanel components = createComponents();
+					container.add(components, BorderLayout.EAST);
+					showWindow();
+				}
+			});
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private JPanel createComponents() {
