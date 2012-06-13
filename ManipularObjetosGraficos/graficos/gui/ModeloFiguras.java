@@ -83,22 +83,13 @@ public class ModeloFiguras implements Modelo {
 
 	@Override
 	public synchronized Seleccion seleccionar(Punto p) {
-		if (seleccionada != null){
-			Seleccionable sel = seleccionada.getFigura();
-			if(seleccionada.getFigura().seleccionar(p)){
-				sel = seleccionada.getFigura();
-				sel.setSeleccion(new SeleccionEnvoltura());
-				return seleccionada;
-			}else
-				for (Seleccion s : vectorFiguras)
-					if(s.getFigura().seleccionar(p)){
-						seleccionada = s;
-						sel = seleccionada.getFigura();
-						sel.setSeleccion(new SeleccionEnvoltura());
-						return seleccionada;
-					}
-			sel.setSeleccion(new SeleccionNormal());
-		}else
+		if (seleccionada != null && seleccionada.getFigura().seleccionar(p) ){
+			return seleccionada;
+		}else{
+			if(seleccionada != null){
+				Seleccionable sel = seleccionada.getFigura();
+				sel.setSeleccion(new SeleccionNormal());
+			}
 			for (Seleccion s : vectorFiguras)
 				if(s.getFigura().seleccionar(p)){
 					seleccionada = s;
@@ -106,6 +97,7 @@ public class ModeloFiguras implements Modelo {
 					sel.setSeleccion(new SeleccionEnvoltura());
 					return seleccionada;
 				}
+		}
 		seleccionada = null;
 		return null;
 	}

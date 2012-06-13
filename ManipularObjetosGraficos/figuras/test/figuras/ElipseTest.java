@@ -26,10 +26,7 @@ public class ElipseTest {
 
 	@Test
 	public void escalarTest() {
-		assertEquals(elipse2, elipse.escalar(5).escalar(-5));
-		assertEquals(new Elipse(new Punto(3, 5), new Punto(12, 15), 32).escalar(2),
-				new Elipse(new Punto(3, 5), new Punto(21, 25), 64));
-		
+		assertEquals(elipse2, elipse.escalar(5).escalar(-5));	
 	}
 
 	@Test
@@ -78,9 +75,7 @@ public class ElipseTest {
 	public void rectanguloExteriorTest(){
 		System.out.println(elipse2.rectanguloExterior());
 		System.out.println(new Elipse(new Punto(10, 50), new Punto(40, 50) , 40).rectanguloExterior());
-		assertEquals(elipse3.rectanguloExterior().getOrigen().getPunto(
-				Math.sqrt(elipse3.getCuerda()*elipse3.getCuerda()/4- Math.sqrt(30*30+25)*Math.sqrt(30*30+25)/4 ),elipse3.getAngulo() + Math.PI/2 ),
-				elipse3.getOrigen().getPunto((elipse3.getCuerda()-Math.sqrt(30*30+25))/2, elipse3.getAngulo() + Math.PI));
+		assertEquals(elipse3.rectanguloExterior().getOrigen(), elipse3.getOrigen());
 	}
 	
 	@After

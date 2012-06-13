@@ -54,6 +54,10 @@ public class Elipse extends FiguraAbstracta{
 		cuerda = e.getCuerda();
 	}
 	
+	public Punto getFoco1(){
+		return f1;
+	}
+	
 	public Punto getFoco2(){
 		return f2;
 	}
@@ -76,9 +80,10 @@ public class Elipse extends FiguraAbstracta{
 	
 	@Override
 	public Elipse mover(Punto p) {
-		double dX = p.getX() - f1.getX();
-		double dY = p.getY() - f1.getY();
-		f1 = p;
+		Punto c = getOrigen();
+		double dX = p.getX() - c.getX();
+		double dY = p.getY() - c.getY();
+		f1.mover(dX, dY);
 		f2.mover(dX, dY);
 		return this;
 	}
@@ -86,7 +91,9 @@ public class Elipse extends FiguraAbstracta{
 	@Override
 	public Elipse escalar(double factor) {
 		if (factor < 0) factor = 1 / (-factor);
-		f2 = new Punto((f2.getX()-f1.getX())*factor + f1.getX() , (f2.getY()-f1.getY())*factor + f1.getY());
+		Punto p = getOrigen();
+		f1 = new Punto((f1.getX()-p.getX())*factor + p.getX() , (f1.getY()-p.getY())*factor + p.getY());
+		f2 = new Punto((f2.getX()-p.getX())*factor + p.getX() , (f2.getY()-p.getY())*factor + p.getY());
 		cuerda *= factor;
 		return this;
 	}
@@ -121,7 +128,7 @@ public class Elipse extends FiguraAbstracta{
 
 	@Override
 	public Punto getOrigen() {
-		return f1;
+		return new Punto((f2.getX()-f1.getX())/2 + f1.getX() , (f2.getY()-f1.getY())/2 + f1.getY());
 	}
 	
 	@Override
@@ -130,7 +137,7 @@ public class Elipse extends FiguraAbstracta{
 		super.angulo += angulo;
 		if (CompararDouble.iguales(Math.abs(super.angulo / (2*Math.PI)), 1, 10)) super.angulo -= 2*Math.PI;
 		if (Math.abs(super.angulo) > Math.PI * 2) super.angulo -= 2*Math.PI;
-		Punto p = new Punto((f2.getX()-f1.getX())/2 + f1.getX() , (f2.getY()-f1.getY())/2 + f1.getY());
+		Punto p = getOrigen();
 		f1 = p.getPunto(dis/2, super.angulo + Math.PI);
 		f2 = p.getPunto(dis/2, (super.angulo));
 		return this;

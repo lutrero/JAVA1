@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.Container;
 
-import figuras.interfaces.FiguraDibujable;
 
 import basicas.Punto;
 
@@ -19,7 +18,6 @@ public interface Vista {
 //	public Integer getPosicionY();
 //	public double getEscalado();
 	public void setSliders(Punto p);
-	public FiguraDibujable getFigura();
 	
 
 }

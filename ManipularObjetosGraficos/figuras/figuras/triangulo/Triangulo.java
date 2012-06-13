@@ -22,6 +22,7 @@ public class Triangulo extends FiguraAbstracta{
 	private Punto a;
 	private Punto b;
 	private Punto c;
+	private double angA;
 
 	
 	public Triangulo(){
@@ -29,6 +30,7 @@ public class Triangulo extends FiguraAbstracta{
 		a = new Punto(0,0);
 		b = new Punto(0, 100);
 		c = new Punto(40, 0);
+		iniciarAngulo();
 	}
 		
 	public Triangulo(Punto a, Punto b, Punto c) {
@@ -38,6 +40,7 @@ public class Triangulo extends FiguraAbstracta{
 		}else{
 			OrdenaTriangulo.ordenaVertices(this, a, b, c);
 		}
+		iniciarAngulo();
 	}
 
 	public Triangulo(Triangulo triangulo){
@@ -48,7 +51,23 @@ public class Triangulo extends FiguraAbstracta{
 			a = new Punto(triangulo.a);
 			b = new Punto(triangulo.b);
 			c = new Punto(triangulo.c);
+			super.angulo = triangulo.getAngulo();
 		}
+		iniciarAngulo();
+	}
+	
+	private void iniciarAngulo(){
+		Punto cen = Circuncentro.obtenerCircuncentro(this);
+		angA = Punto.anguloTresPuntos(cen, new Punto(cen.getX()+10,cen.getY()), a);
+		if(cen.getY() > a.getY()){
+			if(cen.getX() <= a.getX()){
+				angA += 3*Math.PI/2 ;
+			}else{
+				angA += Math.PI/2;
+			}
+		}
+		if (CompararDouble.iguales(angA / (2*Math.PI), 1, 10) ||
+				CompararDouble.comparar(angA, 2*Math.PI, 10) > 0) angA -= 2*Math.PI;
 	}
 	
 	public Punto getA() {
@@ -94,8 +113,10 @@ public class Triangulo extends FiguraAbstracta{
 	@Override
 	public Triangulo escalar(double factor) {
 		if (factor < 0) factor = 1 / (-factor);
-		b.mover((b.getX() - a.getX()) * factor - (b.getX() - a.getX()), (b.getY() - a.getY()) * factor - (b.getY() - a.getY()));
-		c.mover((c.getX() - a.getX()) * factor - (c.getX() - a.getX()), (c.getY() - a.getY()) * factor - (c.getY() - a.getY()));
+		Punto cen = getOrigen();
+		a.mover((a.getX() - cen.getX()) * factor - (a.getX() - cen.getX()), (a.getY() - cen.getY()) * factor - (a.getY() - cen.getY()));
+		b.mover((b.getX() - cen.getX()) * factor - (b.getX() - cen.getX()), (b.getY() - cen.getY()) * factor - (b.getY() - cen.getY()));
+		c.mover((c.getX() - cen.getX()) * factor - (c.getX() - cen.getX()), (c.getY() - cen.getY()) * factor - (c.getY() - cen.getY()));
 		return this;
 	}
 
@@ -125,12 +146,31 @@ public class Triangulo extends FiguraAbstracta{
 		return e1.estaContenido(p) || e2.estaContenido(p) || e3.estaContenido(p);
 	}
 
+//	@Override
+//	public Triangulo rotar(double angulo) {
+//		super.angulo += angulo;
+//		if (CompararDouble.iguales(super.angulo / (2*Math.PI), 1, 10)) super.angulo -= 2*Math.PI;
+//		b = a.getPunto(a.distancia(b), (super.angulo + Punto.anguloTresPuntos(a, b, c)));
+//		c = a.getPunto(a.distancia(c), (super.angulo));
+//		return this;
+//	}
+	
 	@Override
 	public Triangulo rotar(double angulo) {
 		super.angulo += angulo;
-		if (CompararDouble.iguales(super.angulo / (2*Math.PI), 1, 10)) super.angulo -= 2*Math.PI;
-		b = a.getPunto(a.distancia(b), (super.angulo + Punto.anguloTresPuntos(a, b, c)));
-		c = a.getPunto(a.distancia(c), (super.angulo));
+		if (CompararDouble.iguales(super.angulo / (2*Math.PI), 1, 10) || CompararDouble.comparar(super.angulo, 2*Math.PI, 10) > 0) super.angulo -= 2*Math.PI;
+		angA += angulo;
+		if (CompararDouble.iguales(angA / (2*Math.PI), 1, 10) || CompararDouble.comparar(angA, 2*Math.PI, 10) > 0) angA -= 2*Math.PI;
+		Punto cent = Circuncentro.obtenerCircuncentro(this);
+		double dis = cent.distancia(a);
+		if(! estaContenido(cent)){
+			b = cent.getPunto(dis, Punto.anguloTresPuntos(cent, a, b) + angA);
+			c = cent.getPunto(dis, Punto.anguloTresPuntos(cent, a , c) + angA);
+		}else{
+			b = cent.getPunto(dis, (2*Math.PI - Punto.anguloTresPuntos(cent, a, b)) + angA);
+			c = cent.getPunto(dis, Punto.anguloTresPuntos(cent, a, c) + angA);
+		}
+		a = cent.getPunto(dis, angA);
 		return this;
 	}
 	
@@ -157,9 +197,10 @@ public class Triangulo extends FiguraAbstracta{
 	@Override
 	public Triangulo mover(Punto p) {
 		if (p == null) throw new NullPointerException();
-		double dX = p.getX() - a.getX();
-		double dY = p.getY() - a.getY();
-		a = p;
+		Punto cen = getOrigen();
+		double dX = p.getX() - cen.getX();
+		double dY = p.getY() - cen.getY();
+		a.mover(dX, dY);
 		b.mover(dX, dY);
 		c.mover(dX, dY);
 		return this;
@@ -173,6 +214,6 @@ public class Triangulo extends FiguraAbstracta{
 
 	@Override
 	public Punto getOrigen() {
-		return a;
+		return Circuncentro.obtenerCircuncentro(this);
 	} 
 }

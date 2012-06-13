@@ -1,7 +1,7 @@
 package figuras.elipse;
 
 /**
- * @author Luis treviño
+ * @author Luis treviï¿½o
  * Clase que encapsula el metodo dibujar elipse de la clase elipse.
  */
 
@@ -16,16 +16,16 @@ public final class DibujaElipse {
 	
 	static void dibujarElipse(Elipse e, Graphics2D g){
 		Rectangulo r = e.rectanguloExterior();
-		Punto p2 = new Punto((e.getOrigen().getX() - e.getFoco2().getX()) *
-				(((e.getCuerda() - e.getOrigen().distancia(e.getFoco2())) / 2) /
-						e.getOrigen().distancia(e.getFoco2()) ) + e.getOrigen().getX() ,
-				(e.getOrigen().getY() - e.getFoco2().getY()) *
-				(((e.getCuerda() - e.getOrigen().distancia(e.getFoco2())) / 2) /
-						e.getOrigen().distancia(e.getFoco2()) ) + e.getOrigen().getY());
-		Punto p3 = new Punto((e.getFoco2().getX() - e.getOrigen().getX()) *
-				(((e.getCuerda() - e.getOrigen().distancia(e.getFoco2())) / 2) / e.getOrigen().distancia(e.getFoco2()) ) + e.getFoco2().getX(),
-				(e.getFoco2().getY() - e.getOrigen().getY()) * (((e.getCuerda() -
-						e.getOrigen().distancia(e.getFoco2())) / 2) / e.getOrigen().distancia(e.getFoco2())) + e.getFoco2().getY());
+		Punto p2 = new Punto((e.getFoco1().getX() - e.getFoco2().getX()) *
+				(((e.getCuerda() - e.getFoco1().distancia(e.getFoco2())) / 2) /
+						e.getFoco1().distancia(e.getFoco2()) ) + e.getFoco1().getX() ,
+				(e.getFoco1().getY() - e.getFoco2().getY()) *
+				(((e.getCuerda() - e.getFoco1().distancia(e.getFoco2())) / 2) /
+						e.getFoco1().distancia(e.getFoco2()) ) + e.getFoco1().getY());
+		Punto p3 = new Punto((e.getFoco2().getX() - e.getFoco1().getX()) *
+				(((e.getCuerda() - e.getFoco1().distancia(e.getFoco2())) / 2) / e.getFoco1().distancia(e.getFoco2()) ) + e.getFoco2().getX(),
+				(e.getFoco2().getY() - e.getFoco1().getY()) * (((e.getCuerda() -
+						e.getFoco1().distancia(e.getFoco2())) / 2) / e.getFoco1().distancia(e.getFoco2())) + e.getFoco2().getY());
 		Punto pCtrl1 = p2.getPunto(r.getAlto()*2/3, r.getAngulo()+Math.PI/2 );
 		Punto pCtrl2 = p3.getPunto(r.getAlto()*2/3, r.getAngulo()+Math.PI/2 );
 		CubicCurve2D s2 = new CubicCurve2D.Double(p2.getX(), p2.getY(), pCtrl1.getX(), pCtrl1.getY(),

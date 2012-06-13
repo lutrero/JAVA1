@@ -18,7 +18,7 @@ import basicas.Punto;
  */
 public class Rectangulo extends FiguraAbstracta{
 	
-	private Punto origen; 		//Vertice de referencia.
+	private Punto vertice; 		//Vertice de referencia.
 	private double ancho; 		//Ancho del rectangulo.
 	private double alto;		//Alto del rectangulo
 	
@@ -26,29 +26,35 @@ public class Rectangulo extends FiguraAbstracta{
 	
 	public Rectangulo() {
 		super(0);
-		origen = new Punto();
+		vertice = new Punto();
 		alto = ancho = 1;
 	}
 
-	public Rectangulo(Punto origen, double ancho, double alto, double angulo) {
+	public Rectangulo(Punto vertice, double ancho, double alto, double angulo) {
 		super(angulo);
-		if ( origen == null ) throw new NullPointerException();
+		if ( vertice == null ) throw new NullPointerException();
 		if (alto < 0 || ancho < 0)
 			throw new IllegalStateException("Menor que cero??");
-		this.origen = origen;
+		this.vertice = vertice;
 		this.ancho = ancho;
 		this.alto = alto;
 	}
 	
 	public Rectangulo(Rectangulo r){
 		super(r.getAngulo());
-		origen = r.getOrigen();
+		vertice = r.getVertice();
 		ancho = r.getAncho();
 		alto = r.getAlto();
 	}
 
 	public Punto getOrigen() {
-		return origen;
+		Punto p = vertice.getPunto(ancho/2, super.angulo);
+		p = p.getPunto(alto/2, super.angulo + Math.PI/2);
+		return p;
+	}
+	
+	public Punto getVertice(){
+		return vertice;
 	}
 
 	public double getAncho() {
@@ -69,16 +75,17 @@ public class Rectangulo extends FiguraAbstracta{
 	
 	@Override
 	public Rectangulo mover(double dX, double dY) {
-		origen.mover(dX, dY);
+		vertice.mover(dX, dY);
 		return null;
 	}
 
 	@Override
 	public Rectangulo escalar(double factor) {
 		if (factor < 0) factor = 1 / (-factor);
+		Punto p = getOrigen();
 		ancho *= factor;
 		alto *= factor;
-		return this;
+		return this.mover(p);
 	}
 
 	@Override
@@ -103,11 +110,10 @@ public class Rectangulo extends FiguraAbstracta{
 
 	@Override
 	public Rectangulo rotar(double angulo) {
-		Punto p = origen.getPunto(ancho/2, this.angulo);
-		p = p.getPunto(alto/2, super.angulo + Math.PI/2);
+		Punto p = getOrigen();
 		super.angulo += angulo;
-		p = p.getPunto(alto/2, this.angulo + 3*Math.PI/2);
-		origen = p.getPunto(ancho/2, this.angulo + Math.PI);
+		p = p.getPunto(alto/2, super.angulo + 3*Math.PI/2);
+		vertice = p.getPunto(ancho/2, super.angulo + Math.PI);
 		if (CompararDouble.iguales(super.angulo / (2*Math.PI), 1, 8)) super.angulo -= 2*Math.PI;
 		return this;
 	}
@@ -119,21 +125,22 @@ public class Rectangulo extends FiguraAbstracta{
 
 	@Override
 	public Rectangulo mover(Punto p) {
-		origen = p;
+		p = p.getPunto(alto/2, super.angulo + 3*Math.PI/2);
+		vertice = p.getPunto(ancho/2, super.angulo + Math.PI);
 		return this;
 	}
 
 	@Override
 	public Circulo figuraQueEnvuelve() {
-		Punto p = origen.getPunto(ancho/2, angulo);
+		Punto p = vertice.getPunto(ancho/2, angulo);
 		p = p.getPunto(alto/2, angulo + Math.toRadians(90));
-		return new Circulo(p, origen.distancia(p));
+		return new Circulo(p, vertice.distancia(p));
 	}
 
 	
 	@Override
 	public String toString() {
-		return "[origen=" + origen + ", ancho=" + ancho + ", alto="
+		return "[origen=" + vertice + ", ancho=" + ancho + ", alto="
 				+ alto + ", angulo=" + angulo + "]";
 	}
 	
@@ -148,7 +155,7 @@ public class Rectangulo extends FiguraAbstracta{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(angulo);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((origen == null) ? 0 : origen.hashCode());
+		result = prime * result + ((vertice == null) ? 0 : vertice.hashCode());
 		return result;
 	}
 
@@ -161,17 +168,17 @@ public class Rectangulo extends FiguraAbstracta{
 		if (! CompararDouble.iguales(alto, other.alto, 7))     return false;
 		if (! CompararDouble.iguales(ancho, other.ancho, 7))   return false;
 		if (! CompararDouble.iguales(angulo, other.angulo, 7)) return false;
-		if (origen == null) {
-			if (other.origen != null) return false;
-		} else if (!origen.equals(other.origen)) return false;
+		if (vertice == null) {
+			if (other.vertice != null) return false;
+		} else if (!vertice.equals(other.vertice)) return false;
 		return true;
 	}
 	
 	protected Punto[] obtenerPuntos(){
 		Punto [] puntos = new Punto[4];
-		puntos[0] = origen;
-		puntos[1] = origen.getPunto(ancho, angulo);
-		puntos[2] = origen.getPunto(alto, angulo + Math.PI/2);
+		puntos[0] = vertice;
+		puntos[1] = vertice.getPunto(ancho, angulo);
+		puntos[2] = vertice.getPunto(alto, angulo + Math.PI/2);
 		puntos[3] = puntos[1].getPunto(alto, angulo + Math.PI/2);
 		return puntos;
 	}

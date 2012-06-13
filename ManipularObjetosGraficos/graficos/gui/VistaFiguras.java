@@ -1,10 +1,5 @@
 package gui;
 
-import figuras.*;
-import figuras.elipse.ElipseDibujable;
-import figuras.interfaces.*;
-import figuras.triangulo.TrianguloDibujable;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -46,7 +41,6 @@ public class VistaFiguras implements Vista {
 	private JSlider sliderVertical;
 	private JSlider sliderRotar;
 	private JSlider sliderEscalar;
-	private FiguraDibujable vistaFigura;
 	
 	public VistaFiguras(){
 		super();
@@ -71,11 +65,6 @@ public class VistaFiguras implements Vista {
 	@Override
 	public Container getContenedor() {
 		return contenedor;
-	}
-
-	@Override
-	public FiguraDibujable getFigura() {
-		return vistaFigura;
 	}
 
 	@Override
@@ -140,8 +129,7 @@ public class VistaFiguras implements Vista {
 		jbRectangulo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				vistaFigura = new RectanguloDibujable(new Punto(0, 0),15 +  Math.random()* 85,15 + Math.random()* 85, 0);
-				controlador.solicitaNueva(vistaFigura);
+				controlador.solicitaNueva(Controlador.RECTANGULO);
 				panelDibujo.repaint();
 			}
 		});
@@ -155,8 +143,7 @@ public class VistaFiguras implements Vista {
 		jbCirculo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				vistaFigura = new CirculoDibujable(new Punto(20, 20), 20);
-				controlador.solicitaNueva(vistaFigura);
+				controlador.solicitaNueva(Controlador.CIRCULO);
 				panelDibujo.repaint();
 			}
 		});
@@ -171,8 +158,7 @@ public class VistaFiguras implements Vista {
 		jbElipse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				vistaFigura = new ElipseDibujable(new Punto(7, 13), new Punto(37, 13) , Math.random()*80);
-				controlador.solicitaNueva(vistaFigura);
+				controlador.solicitaNueva(Controlador.ELIPSE);
 				panelDibujo.repaint();
 			}
 		});
@@ -186,9 +172,7 @@ public class VistaFiguras implements Vista {
 		jbTriangulo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				vistaFigura = new TrianguloDibujable(new Punto(),
-						new Punto(Math.random() * 150,Math.random() * 50),new Punto(Math.random() * 10,50 + Math.random() * 100));
-				controlador.solicitaNueva(vistaFigura);
+				controlador.solicitaNueva(Controlador.TRIANGULO);
 				panelDibujo.repaint();
 			}
 		});

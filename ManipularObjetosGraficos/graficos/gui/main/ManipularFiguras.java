@@ -18,7 +18,7 @@ public final class ManipularFiguras {
 
 	private void ejecuta(){
 		Vista vista = new VistaFiguras();
-		Modelo modelo = new ModeloFiguras();
+		Modelo modelo = new ModeloFiguras(); 
 		Controlador controlador = new ControladorFiguras();
 		modelo.setVista(vista);
 		vista.setControlador(controlador);
