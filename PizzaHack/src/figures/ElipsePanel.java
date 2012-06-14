@@ -2,6 +2,7 @@ package figures;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 
 public class ElipsePanel extends FigurePanel{
 
@@ -23,4 +24,10 @@ public class ElipsePanel extends FigurePanel{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawOval(getX(), getY(), getAncho(), getAlto());
 	}
+
+	@Override
+	public boolean containsPoint(int x, int y) {
+		return  new Ellipse2D.Double(getX(), getY(), getAncho(), getAlto()).contains(x, y);
+	}
+
 }

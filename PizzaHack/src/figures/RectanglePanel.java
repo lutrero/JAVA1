@@ -2,6 +2,7 @@ package figures;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 public class RectanglePanel extends FigurePanel{
 
@@ -25,4 +26,8 @@ public class RectanglePanel extends FigurePanel{
 		g2d.drawRect(getX(),getY(),getAncho(),getAlto());
 	}
 
+	@Override
+	public boolean containsPoint(int x, int y) {
+		return new Rectangle2D.Double(getX(), getY(), getAncho(), getAlto()).contains(x, y);
+	}
 }

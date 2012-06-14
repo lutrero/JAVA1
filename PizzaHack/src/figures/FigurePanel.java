@@ -2,6 +2,7 @@ package figures;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
@@ -80,6 +81,9 @@ public abstract class FigurePanel extends JPanel{
 		return angulo;
 	}
 	
-	
+	public Rectangle2D getBounding(){
+		return  new Rectangle2D.Double(x, y, ancho, alto);
+	}
 
+	public abstract boolean containsPoint(int x, int y);
 }
