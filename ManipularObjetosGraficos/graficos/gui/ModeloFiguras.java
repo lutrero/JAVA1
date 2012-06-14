@@ -104,7 +104,6 @@ public class ModeloFiguras implements Modelo {
 
 	@Override
 	public void actualizaPosicion(Punto p) {
-		System.out.println(seleccionada.getFigura().getOrigen());
 		seleccionada.getFigura().mover(p);
 		seleccionada.setReferenciaX((int) seleccionada.getFigura().getOrigen().getX());
 		seleccionada.setReferenciaY((int) seleccionada.getFigura().getOrigen().getY());
