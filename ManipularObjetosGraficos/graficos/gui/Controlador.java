@@ -19,11 +19,9 @@ public interface Controlador {
 	public void solicitaRotar(double a, double r);
 	public void solicitarSeleccionar(Punto p);
 	public void solicitaBorrar();
-	public void solicitaNueva(int tipo);
+	public void solicitaNueva();
 	public void solicitaActulizarPosicion(Punto p);
 	public void solicitaDibujar(Seleccion s, Graphics2D g);
-
-	
-	//funcio que saque datos de vista cuando se le solicite y se los pase a modelo. 
+ 
 
 }

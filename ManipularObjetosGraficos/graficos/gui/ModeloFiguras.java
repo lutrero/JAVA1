@@ -39,7 +39,7 @@ public class ModeloFiguras implements Modelo {
 	}
 
 	@Override
-	public synchronized void setRotacion(double angulo, double ref) {
+	public void setRotacion(double angulo, double ref) {
 		if (seleccionada != null){
 			seleccionada.getFigura().rotar(angulo);
 			seleccionada.setAngulo((int) ref);
@@ -51,28 +51,28 @@ public class ModeloFiguras implements Modelo {
 	}
 
 	@Override
-	public synchronized void setPosicion(Punto p) {
+	public void setPosicion(Punto p) {
 		if (seleccionada != null) {
 			seleccionada.getFigura().mover(p);
-			seleccionada.setReferenciaX((int) p.getX());
-			seleccionada.setReferenciaY((int) p.getY());
+			seleccionada.setReferenciaX((int) seleccionada.getFigura().getOrigen().getX());
+			seleccionada.setReferenciaY((int) seleccionada.getFigura().getOrigen().getY());
 		}
 		vista.repintar();
 	}
 
 	@Override
-	public synchronized void setPosicion(double dx, double dy) {
+	public void setPosicion(double dx, double dy) {
 		if (seleccionada != null) {
 			seleccionada.getFigura().mover(dx, dy);
 			seleccionada.setReferenciaX(seleccionada.getReferenciaX() + (int)dx);
-			seleccionada.setReferenciaY( seleccionada.getReferenciaY() + (int)dy);
+			seleccionada.setReferenciaY(seleccionada.getReferenciaY() + (int)dy);
 		}
 		vista.repintar();
 	}
 
 	
 	@Override
-	public synchronized void setEscalado(double factor, double ref) {
+	public void setEscalado(double factor, double ref) {
 		if (seleccionada != null){
 			seleccionada.getFigura().escalar(factor);
 			seleccionada.setEscalado((int) ref);
@@ -82,7 +82,7 @@ public class ModeloFiguras implements Modelo {
 	}
 
 	@Override
-	public synchronized Seleccion seleccionar(Punto p) {
+	public Seleccion seleccionar(Punto p) {
 		if (seleccionada != null && seleccionada.getFigura().seleccionar(p) ){
 			return seleccionada;
 		}else{
@@ -103,12 +103,14 @@ public class ModeloFiguras implements Modelo {
 	}
 
 	@Override
-	public synchronized void actualizaPosicion(Punto p) {
+	public void actualizaPosicion(Punto p) {
+		System.out.println(seleccionada.getFigura().getOrigen());
 		seleccionada.getFigura().mover(p);
-		seleccionada.setReferenciaX((int) p.getX());
-		seleccionada.setReferenciaY((int) p.getY());
+		seleccionada.setReferenciaX((int) seleccionada.getFigura().getOrigen().getX());
+		seleccionada.setReferenciaY((int) seleccionada.getFigura().getOrigen().getY());
 		vista.setSliders(p);
 		vista.repintar();
+		
 	}
 
 	@Override
@@ -123,13 +125,13 @@ public class ModeloFiguras implements Modelo {
 	}
 
 	@Override
-	public synchronized void addFigura(FiguraDibujable f) {
+	public void addFigura(FiguraDibujable f) {
 		vectorFiguras.add(new Seleccion(new FiguraExtendida(f),(int) f.getOrigen().getX(), (int)f.getOrigen().getY(), 0, 1));
 		vista.repintar();
 	}
 
 	@Override
-	public synchronized void borrar() {
+	public void borrar() {
 		if(seleccionada != null)
 			vectorFiguras.remove(seleccionada);
 		seleccionada = null;

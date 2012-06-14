@@ -24,13 +24,6 @@ public class Seleccion {
 		this.escalado = escalado;
 	}
 
-
-	public static Seleccion setSeleccion(FiguraExtendida figura, Integer referenciaX, Integer referenciaY, Integer angulo,
-			Integer escalado){
-		return new Seleccion(figura, referenciaX, referenciaY,  angulo, escalado);
-	}
-
-
 	public FiguraExtendida getFigura() {
 		return figura;
 	}

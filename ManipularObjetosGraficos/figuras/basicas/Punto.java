@@ -2,7 +2,7 @@ package basicas;
 
 /**
  * 
- * @author Luis Treviño
+ * @author Luis Treviï¿½o
  * Clase que representa un punto en dos dimensiones con doble precision.
  *
  */
@@ -125,5 +125,11 @@ public class Punto{
 		if (aux < 0) return 1;
 		if (aux == 0) return 0;
 		return -1;
+	}
+
+	public void mover(Punto p) {
+		x = p.x;
+		y = p.y;
+		
 	}
 }

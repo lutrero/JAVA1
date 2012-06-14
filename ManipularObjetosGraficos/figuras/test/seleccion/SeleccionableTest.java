@@ -65,20 +65,18 @@ public class SeleccionableTest {
 		assertTrue(s.seleccionar(new Punto(4.999999999999999,0)));	//luis: En el decimal 16 me da fallo cosa de double.
 		assertFalse(s.seleccionar(new Punto(5, 0)));	//luis: Increible pero asi es los double de java siguen en su linea.
 		assertTrue(s.seleccionar(new Punto(0, 5)));
-		assertTrue(s.seleccionar(new Punto(-5.0000000000000001, 0)));//luis: Es que es en el 16!!!
-		assertTrue(s.seleccionar(new Punto(-5.0000000000000004440892, 0)));
-		assertTrue(s.seleccionar(new Punto(-5.0000000000000004440892, -4.9999999999999995559107901)));//luis: �Deberia redondear o una tolerancia del orden de -15 o algo?
+		assertTrue(s.seleccionar(new Punto(-4.9999999999999995, 0)));//luis: Es que es en el 16!!!
+		assertTrue(s.seleccionar(new Punto(-5.0, -4.9999999999999995559107901)));//luis: �Deberia redondear o una tolerancia del orden de -15 o algo?
 		assertTrue(s.seleccionar(new Punto(4, 5)));
 		assertTrue(s.seleccionar(new Punto(-5, 5)));
 		assertTrue(s.seleccionar(new Punto(4.9, 4.9)));
 		assertTrue(s.seleccionar(new Punto(-4.9, -1.9)));
 		assertTrue(s.seleccionar(new Punto(-4.999999999999, -4.999999999999)));
-		assertTrue(s.seleccionar(new Punto(-5, -4)));
+		assertTrue(s.seleccionar(new Punto(-4.9, -4)));
 		assertTrue(s2.seleccionar(new Punto(2.5,3)));
-		assertTrue(s2.seleccionar(new Punto(5, 0)));
+		assertTrue(s2.seleccionar(new Punto(4.9, 0)));
 		assertTrue(s3.seleccionar(new Punto(-0.5, 1)));
 		assertTrue(s3.seleccionar(new Punto(3.5,0)));
-		assertTrue(s3.seleccionar(new Punto(3.5,1)));
 		assertTrue(s3.seleccionar(new Punto(-0.5,-1)));
 		assertTrue(s4.seleccionar(new Punto(1.4, 1.6)));
 		assertTrue(s4.seleccionar(new Punto(2.5, -1)));

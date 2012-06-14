@@ -113,12 +113,7 @@ public class Elipse extends FiguraAbstracta{
 	public Rectangulo rectanguloExterior(){
 		double distancia = f1.distancia(f2);
 		double alto = 2 * Math.sqrt(cuerda*cuerda/4 - distancia*distancia/4);
-		double angAux = super.angulo;
-		Punto aux = f1.getPunto((cuerda - distancia) / 2, super.angulo + Math.PI);
-		angAux += Math.toRadians(270);
-		if ( angAux > Math.PI*2 )
-			angAux -= (Math.PI*2);
-		return new Rectangulo(aux.getPunto(alto/2, angAux), cuerda, alto, super.angulo);
+		return new Rectangulo(new Punto(getOrigen().getX()- cuerda/2, getOrigen().getY() - alto/2 ), cuerda, alto, super.angulo);
 	}
 	
 	@Override

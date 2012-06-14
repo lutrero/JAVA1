@@ -41,6 +41,7 @@ public class VistaFiguras implements Vista {
 	private JSlider sliderVertical;
 	private JSlider sliderRotar;
 	private JSlider sliderEscalar;
+	private int tipo;
 	
 	public VistaFiguras(){
 		super();
@@ -77,6 +78,10 @@ public class VistaFiguras implements Vista {
 		sliderEscalar.setValue(modelo.getSeleccion().getEscalado());
 	}
 	
+	@Override
+	public int getTipoFigura() {
+		return tipo;
+	}
 
 	
 ///////////////////////////////////////////////////////////////////////////////////////	
@@ -129,8 +134,8 @@ public class VistaFiguras implements Vista {
 		jbRectangulo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.solicitaNueva(Controlador.RECTANGULO);
-				panelDibujo.repaint();
+				tipo = Controlador.RECTANGULO;
+				controlador.solicitaNueva();
 			}
 		});
 		jbRectangulo.addMouseListener(new BotonMouseListener(jbRectangulo, "rectangulo4"));
@@ -143,8 +148,8 @@ public class VistaFiguras implements Vista {
 		jbCirculo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.solicitaNueva(Controlador.CIRCULO);
-				panelDibujo.repaint();
+				tipo = Controlador.CIRCULO;
+				controlador.solicitaNueva();
 			}
 		});
 		jbCirculo.addMouseListener(new BotonMouseListener(jbCirculo, "circulo4"));
@@ -158,8 +163,8 @@ public class VistaFiguras implements Vista {
 		jbElipse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.solicitaNueva(Controlador.ELIPSE);
-				panelDibujo.repaint();
+				tipo = Controlador.ELIPSE;
+				controlador.solicitaNueva();
 			}
 		});
 		jbElipse.addMouseListener(new BotonMouseListener(jbElipse, "elipse4"));
@@ -172,8 +177,8 @@ public class VistaFiguras implements Vista {
 		jbTriangulo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.solicitaNueva(Controlador.TRIANGULO);
-				panelDibujo.repaint();
+				tipo = Controlador.TRIANGULO;
+				controlador.solicitaNueva();
 			}
 		});
 		jbTriangulo.addMouseListener(new BotonMouseListener(jbTriangulo,  "triangulo4"));
@@ -187,7 +192,6 @@ public class VistaFiguras implements Vista {
 		jbBorrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if ( modelo.getSeleccion() != null)
 					controlador.solicitaBorrar();
 			}
 		});
@@ -209,9 +213,9 @@ public class VistaFiguras implements Vista {
 		contSliders.setLayout(new BoxLayout(contSliders, BoxLayout.Y_AXIS));
 		contSliders.setBackground(Color.getHSBColor(88f, 82f, 209f));
 		contSliders.setLayout(new BoxLayout(contSliders, BoxLayout.Y_AXIS));
-		JLabel hor = new JLabel("Despalzamiento Horizontal");
+		JLabel hor = new JLabel("Desplazamiento Horizontal");
 		hor.setForeground(Color.WHITE);
-		JLabel ver = new JLabel("Despalzamiento Vertical");
+		JLabel ver = new JLabel("Desplazamiento Vertical");
 		ver.setForeground(Color.WHITE);
 		JLabel rot = new JLabel("Rotar");
 		rot.setForeground(Color.WHITE);
@@ -226,10 +230,7 @@ public class VistaFiguras implements Vista {
 		sliderHorizontal.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				if (modelo.getSeleccion() != null){
-					controlador.solicitaMover(new Punto(sliderHorizontal.getValue(), sliderVertical.getValue()));	
-				}
-				panelDibujo.repaint();
+				controlador.solicitaMover(new Punto(sliderHorizontal.getValue(), sliderVertical.getValue()));	
 			}
 		});
 		sliderVertical = new JSlider(JSlider.HORIZONTAL, 0, 500, 20);
@@ -241,10 +242,7 @@ public class VistaFiguras implements Vista {
 		sliderVertical.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				if (modelo.getSeleccion() != null){
 					controlador.solicitaMover(new Punto(sliderHorizontal.getValue(), sliderVertical.getValue()));
-				}
-				panelDibujo.repaint();
 			}
 		});
 		sliderEscalar = new JSlider(JSlider.HORIZONTAL, 0, 15, 1);
@@ -264,7 +262,6 @@ public class VistaFiguras implements Vista {
 						controlador.solicitaEscalar(-1.2, sliderEscalar.getValue());
 					else controlador.solicitaEscalar(1, sliderEscalar.getValue());
 				}
-				panelDibujo.repaint();
 			}
 		});
 		sliderRotar = new JSlider(JSlider.HORIZONTAL, 0, 1080, 0);
@@ -280,7 +277,6 @@ public class VistaFiguras implements Vista {
 				if (seleccionada != null){
 					controlador.solicitaRotar(Math.toRadians(sliderRotar.getValue()- seleccionada.getAngulo()), sliderRotar.getValue());
 				}
-				panelDibujo.repaint();
 			}
 		});
 		contSliders.add(hor);
@@ -445,4 +441,5 @@ public class VistaFiguras implements Vista {
 			boton.setIcon(new ImageIcon(getClass().getResource("/gui/imagenes/" + ruta + "r.png")));
 		}	
 	}
+
 }

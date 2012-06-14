@@ -65,13 +65,13 @@ public class ControladorFiguras implements Controlador{
 	}
 
 	@Override
-	public void solicitaNueva(int tipo) {
-		switch (tipo) {
+	public void solicitaNueva() {
+		switch (vista.getTipoFigura()) {
 		case 1:
 			modelo.addFigura(new RectanguloDibujable(new Punto(0, 0),15 +  Math.random()* 85,15 + Math.random()* 85, 0));
 			break;
 		case 2:
-			modelo.addFigura(new CirculoDibujable(new Punto(20, 20), 20));
+			modelo.addFigura(new CirculoDibujable(new Punto(20,20), 20));
 			break;
 		case 3:
 			modelo.addFigura(new TrianguloDibujable(new Punto(20,20),

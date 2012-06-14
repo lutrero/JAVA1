@@ -31,13 +31,14 @@ public class Rectangulo extends FiguraAbstracta{
 	}
 
 	public Rectangulo(Punto vertice, double ancho, double alto, double angulo) {
-		super(angulo);
+		super(0);
 		if ( vertice == null ) throw new NullPointerException();
 		if (alto < 0 || ancho < 0)
 			throw new IllegalStateException("Menor que cero??");
 		this.vertice = vertice;
 		this.ancho = ancho;
 		this.alto = alto;
+		this.rotar(angulo);
 	}
 	
 	public Rectangulo(Rectangulo r){

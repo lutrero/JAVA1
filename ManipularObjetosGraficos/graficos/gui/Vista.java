@@ -13,11 +13,8 @@ public interface Vista {
 	public void repintar();
 	
 	public Container getContenedor();
-//	public double getRotacion();
-//	public Integer getPosicionX();
-//	public Integer getPosicionY();
-//	public double getEscalado();
 	public void setSliders(Punto p);
+	public int getTipoFigura();
 	
 
 }
