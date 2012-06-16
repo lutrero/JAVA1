@@ -82,7 +82,7 @@ public class ModelImp implements Model {
 					b.setTouches(b.getTouches() - 1);
 					return true;
 				}
-		return false;
+		return bullet.intersects(new Rectangle2D.Float((float) bar.getX(),(float) bar.getY(), (float)bar.getWidth(),(float) bar.getHeight()));
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class ModelImp implements Model {
 					b.setTouches(b.getTouches() - 1);
 					return true;
 				}
-		return false;
+		return bullet.intersects(new Rectangle2D.Float((float) bar.getX(),(float) bar.getY(), (float)bar.getWidth(),(float) bar.getHeight()));
 	}
 	
 		
