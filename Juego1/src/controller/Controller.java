@@ -18,7 +18,5 @@ public interface Controller {
 	
 	public void setModel(Model m);
 
-	public boolean verticalCollision();
-
-	public boolean lateralCollision();
+	public void giveState();
 }

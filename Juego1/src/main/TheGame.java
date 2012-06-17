@@ -1,7 +1,6 @@
 package main;
 
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -28,6 +27,7 @@ public class TheGame {
 	                    System.exit(0);
 	                }
 	            });
+//	        jf.addKeyListener(new ListenerKeyBoard());
 	        jf.setResizable(false);
 	        Model model = new ModelImp();
 	        Controller controller = new ControllerImp();

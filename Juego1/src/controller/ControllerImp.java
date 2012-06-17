@@ -43,15 +43,20 @@ public class ControllerImp implements Controller{
 		model.tryPaintBullet(g);
 	}
 
-
 	@Override
-	public boolean verticalCollision() {
-		return model.verticalCollision();
+	public void giveState() {
+		model.updateState();
 	}
 
-	@Override
-	public boolean lateralCollision() {
-		return model.lateralCollision();
-	}
+
+//	@Override
+//	public boolean verticalCollision() {
+//		return model.verticalCollision();
+//	}
+//
+//	@Override
+//	public boolean lateralCollision() {
+//		return model.lateralCollision();
+//	}
 
 }

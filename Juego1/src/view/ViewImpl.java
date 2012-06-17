@@ -75,22 +75,12 @@ public class ViewImpl extends JComponent implements View{
 	private void fisica(float dt) {
         x += vx * dt;
         y += vy * dt;
-        if (vx < 0 && x <= 0 || vx > 0 && x + DIAMETRO >= ANCHO || lateralCollision())
+        if (vx < 0 && x <= 0 || vx > 0 && x + DIAMETRO >= ANCHO )
             vx = -vx;
-        if (vy < 0 && y < 0 || vy > 0 && y + DIAMETRO >= ALTO || verticalCollision())
+        if (vy < 0 && y < 0 || vy > 0 && y + DIAMETRO >= ALTO )
             vy = -vy;
     }
 	
-	private boolean lateralCollision() {
-		return controller.lateralCollision();
-	}
-
-
-
-	private boolean verticalCollision() {
-		
-		return controller.verticalCollision();
-	}
 
 	private void dibuja() throws Exception {
         SwingUtilities.invokeAndWait(new Runnable() {
@@ -106,11 +96,18 @@ public class ViewImpl extends JComponent implements View{
             long tiempoNuevo = System.nanoTime();
             float dt = (tiempoNuevo - tiempoViejo) / 1000000000f;
             tiempoViejo = tiempoNuevo;
+            controles();
             fisica(dt);
             dibuja();
         }
     }
 	
+	private void controles() {
+		controller.giveState();
+	}
+
+
+
 	public void paintComponent(Graphics g2){
 		Graphics2D g = (Graphics2D) g2;
 		g.setColor(Color.WHITE);
@@ -140,6 +137,34 @@ public class ViewImpl extends JComponent implements View{
 	@Override
 	public Component getComponent() {
 		return this;
+	}
+
+
+
+	@Override
+	public void invertVx() {
+		vx = -vx;
+	}
+
+
+
+	@Override
+	public void invertVy() {
+		vy = -vy;
+	}
+
+
+
+	@Override
+	public float getVx() {
+		return vx;
+	}
+
+
+
+	@Override
+	public float getVy() {
+		return vy;
 	}
 	
 	

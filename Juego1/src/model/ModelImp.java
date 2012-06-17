@@ -2,16 +2,13 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.border.StrokeBorder;
 
-import controller.Controller;
 
 import stuff.Boxes;
 import view.View;
@@ -73,28 +70,65 @@ public class ModelImp implements Model {
 		g.fill(bar);
 	}
 
-
 	@Override
-	public boolean verticalCollision() {
+	public void updateState() {
+		if (bullet.intersects(bar.getX(), bar.getY(), bar.getWidth(), bar.getHeight())){
+			if(view.getVy() > 0)
+				view.invertVy();
+			if(bullet.getMaxX() < bar.getCenterX()){
+				if(view.getVx() > 0)
+					view.invertVx();
+			}else if(bullet.getMinX() > bar.getCenterX()){
+				if (view.getVx() < 0)
+					view.invertVx();
+			}
+		}
 		for(List<Boxes> l : boxes)
-			for(Boxes b : l)
-				if(b.getTouches() != 0 && bullet.intersects(b.getBox())){
+			for(Boxes b : l){
+				if(bullet.contains(b.getBox().getCenterX(), b.getBox().getMaxY()) && b.getTouches() != 0){
 					b.setTouches(b.getTouches() - 1);
-					return true;
+					if ( view.getVy() < 0)
+						view.invertVy();
+				}else if ( bullet.contains(b.getBox().getCenterX(), b.getBox().getMinY()) && b.getTouches() != 0){
+					b.setTouches(b.getTouches() - 1);
+					if (view.getVy() > 0)
+						view.invertVy();
+				}else if( bullet.contains(b.getBox().getMinX(), b.getBox().getCenterY()) && b.getTouches() != 0){
+					b.setTouches(b.getTouches() - 1);
+					if (view.getVx() > 0)
+						view.invertVx();
+				}else if( bullet.contains(b.getBox().getMaxX(), b.getBox().getCenterY()) && b.getTouches() != 0){
+					b.setTouches(b.getTouches() - 1);
+					if(view.getVx() < 0 )
+						view.invertVx();
 				}
-		return bullet.intersects(new Rectangle2D.Float((float) bar.getX(),(float) bar.getY(), (float)bar.getWidth(),(float) bar.getHeight()));
+			}
+				
+					
 	}
 
-	@Override
-	public boolean lateralCollision() {
-		for(List<Boxes> l : boxes)
-			for(Boxes b : l)
-				if(b.getTouches() != 0 && bullet.contains(b.getBox().getCenterX(), b.getBox().getCenterY())){
-					b.setTouches(b.getTouches() - 1);
-					return true;
-				}
-		return bullet.intersects(new Rectangle2D.Float((float) bar.getX(),(float) bar.getY(), (float)bar.getWidth(),(float) bar.getHeight()));
-	}
+
+//	@Override
+//	public boolean verticalCollision() {
+//		for(List<Boxes> l : boxes)
+//			for(Boxes b : l)
+//				if(b.getTouches() != 0 && bullet.intersects(b.getBox())){
+//					b.setTouches(b.getTouches() - 1);
+//					return true;
+//				}
+//		return bullet.intersects(new Rectangle2D.Float((float) bar.getX(),(float) bar.getY(), (float)bar.getWidth(),(float) bar.getHeight()));
+//	}
+//
+//	@Override
+//	public boolean lateralCollision() {
+//		for(List<Boxes> l : boxes)
+//			for(Boxes b : l)
+//				if(b.getTouches() != 0 && bullet.contains(b.getBox().getCenterX(), b.getBox().getCenterY())){
+//					b.setTouches(b.getTouches() - 1);
+//					return true;
+//				}
+//		return bullet.intersects(new Rectangle2D.Float((float) bar.getX(),(float) bar.getY(), (float)bar.getWidth(),(float) bar.getHeight()));
+//	}
 	
 		
 

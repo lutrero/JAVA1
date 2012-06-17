@@ -6,18 +6,26 @@ import controller.Controller;
 
 public interface View {
 
-	public abstract void setController(Controller c);
+	public void setController(Controller c);
 
-	public abstract float getFisicsY();
+	public float getFisicsY();
 
-	public abstract float getFisicsX();
+	public float getFisicsX();
 
-	public abstract double getBarX();
+	public double getBarX();
 
-	public abstract double getBarY();
+	public double getBarY();
 
-	public abstract Component getComponent();
+	public Component getComponent();
+	
+	public void invertVx();
+	
+	public void invertVy();
+	
+	public float getVx();
+	
+	public float getVy();
 
-	public abstract void cicloPrincipalJuego() throws Exception;
+	public void cicloPrincipalJuego() throws Exception;
 
 }
