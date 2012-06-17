@@ -18,6 +18,14 @@ public interface View {
 
 	public Component getComponent();
 	
+	public void accelX();
+	
+	public void deccelX();
+	
+	public void accelY();
+	
+	public void deccelY();
+	
 	public void invertVx();
 	
 	public void invertVy();

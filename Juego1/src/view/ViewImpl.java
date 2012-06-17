@@ -110,7 +110,7 @@ public class ViewImpl extends JComponent implements View{
 
 	public void paintComponent(Graphics g2){
 		Graphics2D g = (Graphics2D) g2;
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, ANCHO, ALTO);
 		g.setColor(Color.BLUE);
 		controller.tryPaintBoxex(g);
@@ -165,6 +165,30 @@ public class ViewImpl extends JComponent implements View{
 	@Override
 	public float getVy() {
 		return vy;
+	}
+
+
+
+	@Override
+	public void accelX() {
+	}
+
+
+
+	@Override
+	public void deccelX() {
+	}
+
+
+
+	@Override
+	public void accelY() {
+	}
+
+
+
+	@Override
+	public void deccelY() {
 	}
 	
 	
