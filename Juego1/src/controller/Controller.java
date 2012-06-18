@@ -19,4 +19,8 @@ public interface Controller {
 	public void setModel(Model m);
 
 	public void giveState();
+
+	public void defaultBulletPos();
+
+	public void initializaBoxes();
 }

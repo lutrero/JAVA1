@@ -33,7 +33,15 @@ public interface View {
 	public float getVx();
 	
 	public float getVy();
+	
+	public void startM();
+	
+	public void stopM() ;
 
 	public void cicloPrincipalJuego() throws Exception;
+
+	void setFisicsX(float x);
+
+	void setFisicsY(float y);
 
 }

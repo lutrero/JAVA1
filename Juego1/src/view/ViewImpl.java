@@ -6,8 +6,9 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
@@ -18,19 +19,20 @@ public class ViewImpl extends JComponent implements View{
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int ANCHO = 600;
-	private static final int ALTO = 600;
+	private static final int ANCHO = 500;
+	private static final int ALTO = 500;
 	private final static int DIAMETRO = 100;
 	
 	private float x, y;
 	private float vx, vy;
 	private Controller controller;
 	private int barX, barY;
+	private int lifes;
 	
 	public ViewImpl(){
 		super();
-		setPreferredSize(new Dimension(ANCHO, ALTO));
-		addMouseMotionListener(new MouseMotionListener() {
+		setPreferredSize(new Dimension(ANCHO + 10, ALTO));
+		addMouseMotionListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -39,16 +41,20 @@ public class ViewImpl extends JComponent implements View{
 				barY = 490;
 			}
 			
-			@Override
-			public void mouseDragged(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
 		});
+		addMouseWheelListener(new MouseAdapter() {
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e){
+				startM();
+			}
+			
+		});
+		
 		x = 245f;
-		y = 380f;
-		vx = 200f;
-		vy = 300f;
+		y = 480f;
+		vx = 0f;
+		vy = 0f;
+		lifes = 10;
 	}
 	
 	
@@ -65,6 +71,17 @@ public class ViewImpl extends JComponent implements View{
 		return y;
 	}
 
+	@Override
+	public void setFisicsX(float x) {
+		this.x = x;
+	}
+
+
+
+	@Override
+	public void setFisicsY(float y) {
+		this.y = y;
+	}
 
 
 	@Override
@@ -75,9 +92,9 @@ public class ViewImpl extends JComponent implements View{
 	private void fisica(float dt) {
         x += vx * dt;
         y += vy * dt;
-        if (vx < 0 && x <= 0 || vx > 0 && x + DIAMETRO >= ANCHO )
+        if (vx < 0 && x <= 0 || vx > 0 && x + DIAMETRO >= ANCHO + 100)
             vx = -vx;
-        if (vy < 0 && y < 0 || vy > 0 && y + DIAMETRO >= ALTO )
+        if (vy < 0 && y < 0 || vy > 0 && y + DIAMETRO >= ALTO + 100 )
             vy = -vy;
     }
 	
@@ -85,7 +102,7 @@ public class ViewImpl extends JComponent implements View{
 	private void dibuja() throws Exception {
         SwingUtilities.invokeAndWait(new Runnable() {
                 public void run() {
-                    paintImmediately(0, 0, ANCHO, ALTO);
+                    paintImmediately(0, 0, ANCHO + 20, ALTO);
                 }
             });
     }
@@ -111,10 +128,9 @@ public class ViewImpl extends JComponent implements View{
 	public void paintComponent(Graphics g2){
 		Graphics2D g = (Graphics2D) g2;
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, ANCHO, ALTO);
-		g.setColor(Color.BLUE);
+		g.fillRect(0, 0, ANCHO + 20, ALTO);
 		controller.tryPaintBoxex(g);
-		g.setColor(Color.ORANGE);
+//		g.setColor(Color.PINK);
 		controller.tryPaintBar(g);
 		g.setColor(Color.GREEN);
 		controller.tryPaintBullet(g);
@@ -171,24 +187,75 @@ public class ViewImpl extends JComponent implements View{
 
 	@Override
 	public void accelX() {
+		if (vx > 0 ){
+			if(vx < 400){
+				if (vx < 50)
+					vx += 20f;
+				else
+					vx += 50f;
+			}
+		}else{
+			if (vx > -400){
+				if(vx > -50)
+					vx -= 20f;
+				else
+					vx -= 50f;
+			}
+		}
 	}
 
 
 
 	@Override
 	public void deccelX() {
+		if(vx > 0 )
+			vx -= 50f;
+		else 
+			vx += 50f;
 	}
 
 
 
 	@Override
 	public void accelY() {
+		if (vy > 0 ){
+			if(vy < 400)
+				vy+=50;
+		}else{
+			if (vy > -400)
+				vy-=50;
+		}
 	}
 
 
 
 	@Override
 	public void deccelY() {
+		if(vy > 200 )
+			vy-=50;
+		else if( vy < -200)
+			vy+=50;
+	}
+
+
+
+	@Override
+	public void startM() {
+		if (vx == 0 && vy == 0){
+			y = 480f;
+			vx = 100f;
+			vy = -300f;
+		}
+	}
+
+
+
+	@Override
+	public void stopM() {
+		lifes--;
+		if (lifes == 0)
+			controller.initializaBoxes();
+		vx = vy = 0f;
 	}
 	
 	

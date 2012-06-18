@@ -1,9 +1,9 @@
 package model;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyListener;
 
 import view.View;
-import controller.Controller;
 
 public interface Model {
 	
@@ -15,6 +15,12 @@ public interface Model {
 	
 	public void tryPaintBar(Graphics2D g);
 
-	public void updateState();
+	public void updateState() throws InterruptedException;
+
+	public void defaultBulletPos();
+
+	public KeyListener getKeyListener();
+	
+	public void generateBoxes();
 
 }

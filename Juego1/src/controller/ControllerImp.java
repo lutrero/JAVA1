@@ -45,7 +45,22 @@ public class ControllerImp implements Controller{
 
 	@Override
 	public void giveState() {
-		model.updateState();
+		try {
+			model.updateState();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void defaultBulletPos() {
+		model.defaultBulletPos();
+	}
+
+	@Override
+	public void initializaBoxes() {
+		model.generateBoxes();
 	}
 
 
