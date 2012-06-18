@@ -27,7 +27,7 @@ public class TheGame {
 		 controller.setModel(model);
 		 controller.setView(view);
 		 view.setController(controller);
-	     JFrame jf = new JFrame("Demo1");
+	     JFrame jf = new JFrame("TheGame--Pakanoid--");
 	     jf.addWindowListener(new WindowAdapter() {
 	             public void windowClosing(WindowEvent e) {
 	                 System.exit(0);

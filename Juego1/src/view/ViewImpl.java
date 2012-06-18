@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
@@ -127,8 +128,9 @@ public class ViewImpl extends JComponent implements View{
 
 	public void paintComponent(Graphics g2){
 		Graphics2D g = (Graphics2D) g2;
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, ANCHO + 20, ALTO);
+//		g.setColor(Color.BLACK);
+		g.drawImage(new ImageIcon(getClass().getResource("/images/Nebulosa.jpg")).getImage(),0,0, ANCHO + 20, ALTO,this);
+//		g.fillRect(0, 0, ANCHO + 20, ALTO);
 		controller.tryPaintBoxex(g);
 //		g.setColor(Color.PINK);
 		controller.tryPaintBar(g);
