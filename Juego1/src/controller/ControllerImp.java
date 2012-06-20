@@ -53,16 +53,27 @@ public class ControllerImp implements Controller{
 		}
 	}
 
-	@Override
-	public void defaultBulletPos() {
-		model.defaultBulletPos();
-	}
 
 	@Override
 	public void initializaBoxes() {
 		model.generateBoxes();
 	}
 
+	@Override
+	public void tryPhisics(float dt) {
+		model.phisics(dt);
+	}
+
+	@Override
+	public void startM() {
+//		if(model.getnBullets() == 0)
+			model.addBullet();
+	}
+
+//	@Override
+//	public void defaultBulletPos() {
+//		model.defaultBulletPos();
+//	}
 
 //	@Override
 //	public boolean verticalCollision() {

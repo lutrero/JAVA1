@@ -1,25 +1,36 @@
 package stuff;
 
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class ListenerKeyBoard extends KeyAdapter{
 
-	private int x;
+
+public class ListenerKeyBoard implements KeyListener {
+
+	
 	public ListenerKeyBoard() {
 		super();
-		x = 250;
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
-	@Override
-	public void keyPressed(KeyEvent k) {
-		System.out.println(k.getKeyCode());
-		if(x > 25 && x < 475){
-			if(k.getKeyCode() == 39){
-				x++;
-			}else if(k.getKeyCode() ==37);
-				x--;
-		}
-	}
+	
 }

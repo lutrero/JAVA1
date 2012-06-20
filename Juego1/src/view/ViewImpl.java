@@ -20,19 +20,19 @@ public class ViewImpl extends JComponent implements View{
 
 	private static final long serialVersionUID = 1L;
 
-	private static final int ANCHO = 500;
-	private static final int ALTO = 500;
-	private final static int DIAMETRO = 100;
+	public static final int ANCHO = 500;
+	public static final int ALTO = 500;
+	private final static int DIAMETRO = 10;
 	
-	private float x, y;
-	private float vx, vy;
+//	private float x, y;
+//	private float vx, vy;
 	private Controller controller;
 	private int barX, barY;
 	private int lifes;
 	
 	public ViewImpl(){
 		super();
-		setPreferredSize(new Dimension(ANCHO + 10, ALTO));
+		setPreferredSize(new Dimension(ANCHO + 10, ALTO + 30));
 		addMouseMotionListener(new MouseAdapter() {
 			
 			@Override
@@ -51,38 +51,15 @@ public class ViewImpl extends JComponent implements View{
 			
 		});
 		
-		x = 245f;
-		y = 480f;
-		vx = 0f;
-		vy = 0f;
+//		x = 245f;
+//		y = 480f;
+//		vx = 0f;
+//		vy = 0f;
 		lifes = 10;
 	}
 	
 	
 	
-	@Override
-	public float getFisicsX() {
-		return x;
-	}
-
-
-
-	@Override
-	public float getFisicsY() {
-		return y;
-	}
-
-	@Override
-	public void setFisicsX(float x) {
-		this.x = x;
-	}
-
-
-
-	@Override
-	public void setFisicsY(float y) {
-		this.y = y;
-	}
 
 
 	@Override
@@ -91,12 +68,13 @@ public class ViewImpl extends JComponent implements View{
 	}
 	
 	private void fisica(float dt) {
-        x += vx * dt;
-        y += vy * dt;
-        if (vx < 0 && x <= 0 || vx > 0 && x + DIAMETRO >= ANCHO + 100)
-            vx = -vx;
-        if (vy < 0 && y < 0 || vy > 0 && y + DIAMETRO >= ALTO + 100 )
-            vy = -vy;
+//        x += vx * dt;
+//        y += vy * dt;
+//        if (vx < 0 && x <= 0 || vx > 0 && x + DIAMETRO >= ANCHO + 100)
+//            vx = -vx;
+//        if (vy < 0 && y < 0 || vy > 0 && y + DIAMETRO >= ALTO + 100 )
+//            vy = -vy;
+		controller.tryPhisics(dt);
     }
 	
 
@@ -108,7 +86,7 @@ public class ViewImpl extends JComponent implements View{
             });
     }
 	
-	public void cicloPrincipalJuego() throws Exception {
+	public synchronized void cicloPrincipalJuego() throws Exception {
         long tiempoViejo = System.nanoTime();
         while (true) {
             long tiempoNuevo = System.nanoTime();
@@ -129,7 +107,7 @@ public class ViewImpl extends JComponent implements View{
 	public void paintComponent(Graphics g2){
 		Graphics2D g = (Graphics2D) g2;
 //		g.setColor(Color.BLACK);
-		g.drawImage(new ImageIcon(getClass().getResource("/images/Nebulosa.jpg")).getImage(),0,0, ANCHO + 20, ALTO,this);
+		g.drawImage(new ImageIcon(getClass().getResource("/images/Nebulosa.jpg")).getImage(),0,0, ANCHO + 20, ALTO + 30 ,this);
 //		g.fillRect(0, 0, ANCHO + 20, ALTO);
 		controller.tryPaintBoxex(g);
 //		g.setColor(Color.PINK);
@@ -159,106 +137,133 @@ public class ViewImpl extends JComponent implements View{
 
 
 
-	@Override
-	public void invertVx() {
-		vx = -vx;
-	}
-
-
-
-	@Override
-	public void invertVy() {
-		vy = -vy;
-	}
-
-
-
-	@Override
-	public float getVx() {
-		return vx;
-	}
-
-
-
-	@Override
-	public float getVy() {
-		return vy;
-	}
-
-
-
-	@Override
-	public void accelX() {
-		if (vx > 0 ){
-			if(vx < 400){
-				if (vx < 50)
-					vx += 20f;
-				else
-					vx += 50f;
-			}
-		}else{
-			if (vx > -400){
-				if(vx > -50)
-					vx -= 20f;
-				else
-					vx -= 50f;
-			}
-		}
-	}
-
-
-
-	@Override
-	public void deccelX() {
-		if(vx > 0 )
-			vx -= 50f;
-		else 
-			vx += 50f;
-	}
-
-
-
-	@Override
-	public void accelY() {
-		if (vy > 0 ){
-			if(vy < 400)
-				vy+=50;
-		}else{
-			if (vy > -400)
-				vy-=50;
-		}
-	}
-
-
-
-	@Override
-	public void deccelY() {
-		if(vy > 200 )
-			vy-=50;
-		else if( vy < -200)
-			vy+=50;
-	}
 
 
 
 	@Override
 	public void startM() {
-		if (vx == 0 && vy == 0){
-			y = 480f;
-			vx = 100f;
-			vy = -300f;
-		}
+		//TODO
+//		if (vx == 0 && vy == 0){
+//			y = 480f;
+//			vx = 100f;
+//			vy = -300f;
+//		}
+		controller.startM();
 	}
 
 
 
 	@Override
 	public void stopM() {
-		lifes--;
-		if (lifes == 0)
-			controller.initializaBoxes();
-		vx = vy = 0f;
+		//TODO
+//		lifes--;
+//		if (lifes == 0)
+//			controller.initializaBoxes();
+//		vx = vy = 0f;
 	}
 	
+//	@Override
+//	public float getFisicsX() {
+//		return x;
+//	}
+//
+//
+//
+//	@Override
+//	public float getFisicsY() {
+//		return y;
+//	}
+//
+//	@Override
+//	public void setFisicsX(float x) {
+//		this.x = x;
+//	}
+//
+//
+//
+//	@Override
+//	public void setFisicsY(float y) {
+//		this.y = y;
+//	}
 	
+
+//	@Override
+//	public void invertVx() {
+//		vx = -vx;
+//	}
+//
+//
+//
+//	@Override
+//	public void invertVy() {
+//		vy = -vy;
+//	}
+//
+//
+//
+//	@Override
+//	public float getVx() {
+//		return vx;
+//	}
+//
+//
+//
+//	@Override
+//	public float getVy() {
+//		return vy;
+//	}
+//
+//
+//
+//	@Override
+//	public void accelX() {
+//		if (vx > 0 ){
+//			if(vx < 400){
+//				if (vx < 50)
+//					vx += 20f;
+//				else
+//					vx += 50f;
+//			}
+//		}else{
+//			if (vx > -400){
+//				if(vx > -50)
+//					vx -= 20f;
+//				else
+//					vx -= 50f;
+//			}
+//		}
+//	}
+//
+//
+//
+//	@Override
+//	public void deccelX() {
+//		if(vx > 0 )
+//			vx -= 50f;
+//		else 
+//			vx += 50f;
+//	}
+//
+//
+//
+//	@Override
+//	public void accelY() {
+//		if (vy > 0 ){
+//			if(vy < 400)
+//				vy+=50;
+//		}else{
+//			if (vy > -400)
+//				vy-=50;
+//		}
+//	}
+//
+//
+//
+//	@Override
+//	public void deccelY() {
+//		if(vy > 200 )
+//			vy-=50;
+//		else if( vy < -200)
+//			vy+=50;
+//	}
 }

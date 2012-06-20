@@ -3,6 +3,7 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.event.KeyListener;
 
+import stuff.Bullet;
 import view.View;
 
 public interface Model {
@@ -17,10 +18,21 @@ public interface Model {
 
 	public void updateState() throws InterruptedException;
 
-	public void defaultBulletPos();
+//	public void defaultBulletPos();
 
 	public KeyListener getKeyListener();
 	
 	public void generateBoxes();
 
+	public void phisics(float dt);
+
+	public void addBullet();
+	
+	public void addBullet(Bullet b);
+	
+	public void addBullet(float x , float y);
+	
+	public void addBullet(float x , float y, float vx, float vy);
+	
+	public int getnBullets();
 }

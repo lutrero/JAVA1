@@ -20,7 +20,11 @@ public interface Controller {
 
 	public void giveState();
 
-	public void defaultBulletPos();
+//	public void defaultBulletPos();
 
 	public void initializaBoxes();
+
+	public void tryPhisics(float dt);
+
+	public void startM();
 }
