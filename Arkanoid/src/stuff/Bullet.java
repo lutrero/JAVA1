@@ -5,11 +5,15 @@ import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
+import model.ModelImpl;
+
+import view.ViewImpl;
+
 public class Bullet {
 	
 	public static final int DIAMETER = 10;
 
-	private static final float ANCHO = 500;
+	private static final float ANCHO = 700;
 
 	private static final float ALTO = 500;
 	
@@ -22,7 +26,7 @@ public class Bullet {
 		super();
 		x = y = vx = vy = 0;
 		bullet = new Ellipse2D.Float();
-		on = true;
+		on = false;
 	}
 	
 	public Bullet(float x, float y, float vx, float vy) {
@@ -47,8 +51,9 @@ public class Bullet {
 
 	public void paintBullet(Graphics2D g){
 		bullet.setFrame(x, y, DIAMETER, DIAMETER);
+		if ( ModelImpl.aux){
 		g.setPaint(new GradientPaint((float)bullet.getX(),(float) bullet.getY(), Color.GREEN,(float) bullet.getCenterX(),(float) bullet.getY(), Color.YELLOW, true));
-		g.fill(bullet);
+		g.fill(bullet);}
 	}
 
 	public float getX() {

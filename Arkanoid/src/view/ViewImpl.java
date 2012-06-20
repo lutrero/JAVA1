@@ -17,7 +17,7 @@ import controller.Controller;
 
 public class ViewImpl implements View {
 	
-	public static final int ANCHO = 500;
+	public static final int ANCHO = 700;
 	public static final int ALTO = 500;
 	private static final  int DIAMETER = 10;
 	

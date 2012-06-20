@@ -1,5 +1,8 @@
 package stuff;
 
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 public class Boxes {
@@ -69,6 +72,19 @@ public class Boxes {
 		if (touches != other.touches)
 			return false;
 		return true;
+	}
+
+
+	public void paintBox(Graphics2D g) {
+		if(getTouches() == 1){
+			g.setPaint(new GradientPaint((float)getBox().getX(),(float) getBox().getY(), Color.GRAY,(float) getBox().getCenterX(),(float)getBox().getY(), Color.blue, true));
+		}else if(getTouches() == 2)
+			g.setPaint(new GradientPaint((float)getBox().getX(),(float) getBox().getY(), Color.RED,(float) getBox().getCenterX(),(float)getBox().getY(), Color.ORANGE, true));
+		else if (getTouches() == 3)
+			g.setPaint(new GradientPaint((float)getBox().getX(),(float) getBox().getY(), Color.white,(float) getBox().getCenterX(),(float) getBox().getY(), Color.GRAY, true));
+		g.fill(getBox());
+		g.setColor(Color.BLACK);
+		g.draw(getBox());
 	}
 	
 	
