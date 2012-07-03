@@ -6,13 +6,7 @@ import controller.Controller;
 
 public interface View {
 
-	Runnable getGameZone();
-	
-	public void setController(Controller c);
-	
-	public double getBarX();
-
-	public double getBarY();
+	void setController(Controller controller);
 
 	Component getComponent();
 

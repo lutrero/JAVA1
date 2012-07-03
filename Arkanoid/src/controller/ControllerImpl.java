@@ -1,45 +1,16 @@
 package controller;
 
-import java.awt.Graphics2D;
+
 
 import model.Model;
 
-public class ControllerImpl implements Controller{
-	
-	private Model model;
-	
-	
-	public ControllerImpl(){
-		super();
-		model = null;
-	}
-	
-	
-	
+public class ControllerImpl implements Controller {
 
 	@Override
-	public void tryPaintBoxex(Graphics2D g) {
-		model.tryPaintBoxes(g);
+	public void setModel(Model model) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	@Override
-	public void tryPaintBar(Graphics2D g) {
-		model.tryPaintBar(g);
-	}
-
-	@Override
-	public void tryPaintBullets(Graphics2D g) {
-		model.tryPaintBullets(g);
-	}
-	
-	@Override
-	public void setModel(Model m) {
-		model = m;
-	}
-
-	@Override
-	public void startM() {
-		model.startM();
-	}
 
 }
