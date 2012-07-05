@@ -1,6 +1,7 @@
 package view;
 
-import java.awt.Component;
+
+import javax.swing.JComponent;
 
 import controller.Controller;
 
@@ -8,6 +9,6 @@ public interface View {
 
 	void setController(Controller controller);
 
-	Component getComponent();
+	JComponent getComponent();
 
 }

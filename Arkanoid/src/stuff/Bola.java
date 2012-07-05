@@ -1,6 +1,6 @@
 package stuff;
 
-public class Bola extends Circular implements Fisica{
+public class Bola extends Circular implements Fisica, Accelerates{
 	
 	private float vx, vy;
 	private static int ANCHOFRAME, ALTOFRAME;
