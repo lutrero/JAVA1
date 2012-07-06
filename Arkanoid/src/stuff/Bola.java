@@ -39,6 +39,47 @@ public class Bola extends Circular implements Fisica, Accelerates{
 	            vy = -vy;
 	}
 
+	
+	
+	public float getVx() {
+		return vx;
+	}
+
+
+	public void setVx(float vx) {
+		this.vx = vx;
+	}
+
+
+	public float getVy() {
+		return vy;
+	}
+
+
+	public void setVy(float vy) {
+		this.vy = vy;
+	}
+
+
+	public static int getANCHOFRAME() {
+		return ANCHOFRAME;
+	}
+
+
+	public static void setANCHOFRAME(int aNCHOFRAME) {
+		ANCHOFRAME = aNCHOFRAME;
+	}
+
+
+	public static int getALTOFRAME() {
+		return ALTOFRAME;
+	}
+
+
+	public static void setALTOFRAME(int aLTOFRAME) {
+		ALTOFRAME = aLTOFRAME;
+	}
+
 
 	@Override
 	public int hashCode() {

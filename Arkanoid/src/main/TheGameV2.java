@@ -15,7 +15,7 @@ import controller.ControllerImpl;
 public class TheGameV2 {
 
 	public static void main(String[] args) {
-		 Model model = new ModelImpl();
+		 final Model model = new ModelImpl();
 		 Controller controller = new ControllerImpl();
 		 View view = new ViewImpl();
 		 model.setView(view);
@@ -24,6 +24,7 @@ public class TheGameV2 {
 	     JFrame jf = new JFrame("TheGame--Pakanoid--");
 	     jf.addWindowListener(new WindowAdapter() {
 	             public void windowClosing(WindowEvent e) {
+	            	 System.out.println(model.getPuntuacion());
 	                 System.exit(0);
 	             }
 	            });
@@ -33,5 +34,4 @@ public class TheGameV2 {
 	     jf.setVisible(true);
 	     model.gameCicle();
 	}
-
 }

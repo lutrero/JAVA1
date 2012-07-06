@@ -86,7 +86,15 @@ public abstract class Circular extends PreImage{
 	public int getMinY(){
 		return centroY - radio;
 	}
+	
+	public boolean intersects(Circular c){
+		return new Punto(centroX, centroY).distancia(new Punto(c.centroX, c.centroY)) < (radio + c.radio);
+	}
 
+	public boolean intersects(Rectangular r){
+		return false;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

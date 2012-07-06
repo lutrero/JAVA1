@@ -1,10 +1,12 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -16,26 +18,37 @@ public class ViewImpl implements View {
 	
 	private GamePanel gZone;
 	private Controller controller;
+	private int barX;
 	
 	
 	
 	public ViewImpl() {
 		super();
-		// TODO Auto-generated constructor stub
+		controller = null;
+		gZone = new GamePanel();
+		barX = 50;
+	}
+	
+	@Override
+	public int getBarX() {
+		// TODO Auto-generated method stub
+		return barX;
 	}
 
 	@Override
 	public void setController(Controller controller) {
-		// TODO Auto-generated method stub
-		
+		this.controller = controller;
 	}
 
 	@Override
 	public JComponent getComponent() {
-		// TODO Auto-generated method stub
-		return null;
+		return gZone;
 	}
 
+	@Override
+	public void repintar() {
+		gZone.repaint();
+	}
 	
 
 	private class GamePanel extends JPanel{
@@ -45,6 +58,7 @@ public class ViewImpl implements View {
 		public GamePanel() {
 			super();
 			addMouseMotionListener(new GameListener());
+			setPreferredSize(new Dimension(500, 500));
 //			addKeyListener(new GameListener());
 		}
 		
@@ -52,7 +66,7 @@ public class ViewImpl implements View {
 		public void paintComponent(Graphics g2){
 			super.paintComponent(g2);
 			Graphics2D g = (Graphics2D) g2;
-//			controller.tryPaintAll(g);
+			controller.tryPaintAll(g);
 		}
 	}
 	
@@ -64,6 +78,12 @@ public class ViewImpl implements View {
 			super();
 		}
 
+		@Override
+		public void mouseMoved(MouseEvent e){
+//			controller.setBar(e.getX(), e.getY());
+			barX= e.getX();
+		}
+		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
@@ -83,4 +103,6 @@ public class ViewImpl implements View {
 		}
 		
 	}
+
+
 }

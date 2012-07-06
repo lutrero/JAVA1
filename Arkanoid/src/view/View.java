@@ -7,8 +7,12 @@ import controller.Controller;
 
 public interface View {
 
-	void setController(Controller controller);
+	public void setController(Controller controller);
 
-	JComponent getComponent();
+	public JComponent getComponent();
+
+	public void repintar();
+
+	public int getBarX();
 
 }

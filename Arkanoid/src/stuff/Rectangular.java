@@ -78,6 +78,14 @@ public abstract class Rectangular extends PreImage{
 		return centroY - alto/2;
 	}
 	
+	public boolean intersects(Circular c){
+		return false;
+	}
+
+	public boolean intersects(Rectangular r){
+		return false;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

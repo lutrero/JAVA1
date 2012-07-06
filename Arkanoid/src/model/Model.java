@@ -1,6 +1,7 @@
 package model;
 
 
+import java.awt.Graphics2D;
 import java.util.List;
 
 import stuff.Bala;
@@ -29,6 +30,12 @@ public interface Model {
 	public void setBloques(List<List<Bloque>> bloques);
 	
 	public void setObs(List<Obstaculos> obs);
+	
+	public void paintAll(Graphics2D g);
+
+	public void setBarPos(int x, int y);
+
+	public int getPuntuacion();
 	
 	
 }
