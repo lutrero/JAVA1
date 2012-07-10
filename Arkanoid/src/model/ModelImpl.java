@@ -4,9 +4,11 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 import levels.Level1;
@@ -47,11 +49,10 @@ public class ModelImpl implements Model {
 		levels = new Vector<Levels>();
 		balas = new Vector<Bala>();
 		vista = null;
-		barra = new Bar("Nebulosa.jpg", 50, 480, 50, 10);
+		barra = new Bar("aBar.png", 50, 480, 50, 10);
 		levels.add(new Level1());
 		bloques = levels.get(0).generateBlocks();
-		bolas.add(new Bola("Nebulosa.jpg", 50, 490, 5, 500, 500));
-		
+		bolas.add(new Bola("normalBall.png", 50, 450, 5, 500, 500));
 	}
 
 	@Override
@@ -70,59 +71,42 @@ public class ModelImpl implements Model {
 	}
 
 	private void controles() {
+		boolean aux = false;
 		barra.setCentroX(vista.getBarX());
 		for (Bola b : bolas){
+			if (b.isAlive())
 			for(List<Bloque> l : bloques)
-				for(Bloque bl : l){
-					if(bl.getToques() != 0){
-						if(b.getCentroX() == bl.getCentroX() && b.getMinY() == bl.getMaxY() && b.getMaxY() == bl.getMinY()){
-							bl.setToques(bl.getToques() - 1);
-							b.invertVy();
-							puntuacion += 25;
-						}else
-						if(b.getCentroY() == bl.getCentroY() && b.getMaxX() == bl.getMinX() && b.getMinX() == bl.getMaxX()){
-							bl.setToques(bl.getToques() - 1);
-							b.invertVx();
-							puntuacion += 25;
+				for (Bloque bl : l){
+					if ( bl.getToques() != 0)
+						if (b.intersects(bl)){
+							if ( bl.getToques() == 2 ){
+								barra.resize(true);
+								aux = true;
+							}
+							puntuacion += 5;
+							bl.reboteBola(b);
 						}
-					}
 				}
-			if (b.getMinY() < barra.getCentroY() && b.getMaxY() >= barra.getMinY()){
-				if ( b.getCentroX() < (barra.getMinX() + barra.getAnchoExt()) && b.getMaxX() > barra.getMinX()){
-					if (b.getVx() >= 0)
-						b.invertVx();
-					if ( b.getVx() < 400f)
-						b.accelX();
-					if (b.getCentroX() < barra.getMinX() && b.getVy() > 200f )
-						b.deccelY();
-					b.invertVy();
-				}else if (b.getCentroX() > (barra.getMaxX() - barra.getAnchoExt()) && b.getMinX() > barra.getMaxX() ){
-					if (b.getVx() <= 0)
-						b.invertVx();
-					if ( b.getVx() > -400f)
-						b.accelX();
-					if (b.getCentroX() > barra.getMaxX() && b.getVy() > 200f)
-						b.deccelY();
-					b.invertVy();
-				}else if ( b.getCentroX() >= barra.getMinX() + barra.getAnchoExt() && b.getCentroX() <= barra.getCentroX()){
-					if ( b.getVy() < 400f && b.getVy() > 0)
-						b.accelY();
-					if ( b.getVx() > 0)
-						b.deccelX();
-					b.invertVy();
-				}else if( b.getCentroX() <= barra.getMaxX() - barra.getAnchoExt() && b.getCentroX() >= barra.getCentroX()){
-					if ( b.getVy() > -400f && b.getVy() < 0)
-						b.accelY();
-					if ( b.getVx() < 0)
-						b.deccelX();
-					b.invertVy();
-				}
-			}}
-	}
+			if ( b.intersects(barra)){
+				b.invertVy();
+				barra.propulsionBola(b);
+			}
+			if (b.getMinY() > barra.getMaxY())
+				b.killBall();
+		}
+		Iterator<Bola> it = bolas.iterator();
+		while (it.hasNext()){
+			if(!it.next().isAlive())
+				it.remove();
+		}
+		if (aux)  bolas.add(new Bola("normalBall.png", 50, 490, 5, 500, 500));
+	}	
+	
+
 	
 	@Override
 	public void gameCicle() {
-		Timer gameTimer = new Timer(30, new ActionListener() {
+		Timer gameTimer = new Timer(10, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -153,8 +137,10 @@ public class ModelImpl implements Model {
 
 	@Override
 	public void paintAll(Graphics2D g) {
+		g.drawImage(new ImageIcon(getClass().getResource("/images/Nebulosa.jpg")).getImage(),0,0, 500 + 20, 500 + 30 ,null);
 		for ( Bola b : bolas)
-			g.drawImage(b.getIcon(), b.getMinX(), b.getMinY(), b.getRadio() * 2, b.getRadio() * 2, null);
+			if(b.isAlive())
+				g.drawImage(b.getIcon(), b.getMinX(), b.getMinY(), b.getRadio() * 2, b.getRadio() * 2, null);
 		for(List<Bloque> l : bloques)
 			for(Bloque b : l)
 				if ( b.getToques() != 0)

@@ -79,11 +79,18 @@ public abstract class Rectangular extends PreImage{
 	}
 	
 	public boolean intersects(Circular c){
-		return false;
+		return c.intersects(this);
 	}
 
 	public boolean intersects(Rectangular r){
+		if (((r.getMaxX() - getMinX()) < (ancho/2 + r.ancho/2) && (r.getMaxY() - getMinY()) < (alto/2 + r.alto/2)) ||
+				((getMaxX() - r.getMinX()) < (ancho/2 + r.ancho/2) && (getMaxY() - r.getMinY() < (alto/2 + r.alto/2))))
+			return true;
 		return false;
+	}
+	
+	public boolean contains(int x, int y){
+		return getMinX() <= x && x <= getMaxX() && getMinY() <= y && y <= getMaxY();
 	}
 	
 	@Override

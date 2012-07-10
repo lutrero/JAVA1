@@ -1,7 +1,7 @@
 package stuff;
 
 public class Bloque extends Rectangular{
-
+	
 	private int toques;
 	private Premio premio;
 	
@@ -59,6 +59,25 @@ public class Bloque extends Rectangular{
 			return false;
 		return true;
 	}
-	
+	public void reboteBola(Bola b) {
+		// TODO Auto-generated method stub
+		if(b.contains(getCentroX(), getMaxY())){
+			toques--;
+			if ( b.getVy() < 0)
+				b.invertVy();
+		}else if ( b.contains(getCentroX(), getMinY())){
+			toques--;
+			if (b.getVy() > 0)
+				b.invertVy();
+		}else if( b.contains(getMinX(), getCentroY()) ){
+			toques--;
+			if (b.getVx() > 0)
+				b.invertVx();
+		}else if( b.contains(getMaxX(), getCentroY())){
+			toques--;
+			if(b.getVx() < 0 )
+				b.invertVx();
+		}
+	}
 	
 }

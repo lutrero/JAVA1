@@ -3,11 +3,13 @@ package stuff;
 public class Bola extends Circular implements Fisica, Accelerates{
 	
 	private float vx, vy;
+	private boolean viva;
 	private static int ANCHOFRAME, ALTOFRAME;
 
 	public Bola() {
 		super();
 		vx = vy = 0;
+		viva = true;
 		ANCHOFRAME = ALTOFRAME = 0;
 	}
 
@@ -15,10 +17,20 @@ public class Bola extends Circular implements Fisica, Accelerates{
 	public Bola(String name, int centroX, int centroY, int radio, int anchoFrame, int altoFrame) {
 		super(name, centroX, centroY, radio);
 		vx = 100f;
-		vy = 300f;
+		vy = -300f;
+		viva = true;
 		ALTOFRAME = altoFrame;
 		ANCHOFRAME = anchoFrame;
 		
+	}
+	
+	public boolean isAlive(){
+		return viva;
+	}
+	
+	public void killBall(){
+		viva = false;
+		vx = vy = 0;
 	}
 	
 	public void invertVx(){
@@ -110,11 +122,10 @@ public class Bola extends Circular implements Fisica, Accelerates{
 
 	@Override
 	public void accelX() {
-		if (vx < 0 && vx > 400)
-			vx -= 20f;
-		else if(vx > 0 && vx < 400)
-			vx += 20f;
-		else vx +=20f;
+		if (vx < 0 && vx > -250)
+			vx -= 10f;
+		else if(vx > 0 && vx < 250)
+			vx += 10f;
 	}
 
 
@@ -130,11 +141,10 @@ public class Bola extends Circular implements Fisica, Accelerates{
 
 	@Override
 	public void deccelX() {
-		if (vx < 0 && vx > 400)
-			vx += 20f;
-		else if(vx > 0 && vx < 400)
-			vx -= 20f;
-		else vx -= 20f;
+		if (vx < 0)
+			vx += 10f;
+		else if( vx < 310)
+			vx -= 10f;
 	}
 
 
@@ -150,15 +160,14 @@ public class Bola extends Circular implements Fisica, Accelerates{
 
 	@Override
 	public void startM() {
-		// TODO Auto-generated method stub
-		
+		vx = 150f;
+		vy = -275f;
 	}
 
 
 	@Override
 	public void stopM() {
-		// TODO Auto-generated method stub
-		
+		vx = vy = 0;
 	}
 	
 	
