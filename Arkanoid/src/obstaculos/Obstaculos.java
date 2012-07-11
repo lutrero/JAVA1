@@ -1,4 +1,4 @@
-package stuff;
+package obstaculos;
 
 import java.awt.Image;
 

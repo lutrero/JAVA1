@@ -4,11 +4,13 @@ package model;
 import java.awt.Graphics2D;
 import java.util.List;
 
+import obstaculos.Obstaculos;
+
+import premios.Premio;
+
 import stuff.Bala;
 import stuff.Bloque;
 import stuff.Bola;
-import stuff.Obstaculos;
-import stuff.Premio;
 import view.View;
 
 public interface Model {

@@ -3,19 +3,22 @@ package levels;
 import java.util.ArrayList;
 import java.util.List;
 
+import obstaculos.Obstaculos;
+
 import stuff.Bloque;
 
 public class Level1 implements Levels {
 	
 	private int nBloques;
 	private List<List<Bloque>> bloques;
+	private List<Obstaculos> obs;
 	
 	
 	
 	
 	public Level1() {
 		super();
-		nBloques = 500;
+		nBloques = 300;
 		bloques = new ArrayList<List<Bloque>>();
 	}
 
@@ -42,6 +45,8 @@ public class Level1 implements Levels {
 					bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 1, null));
 			}
 		}
+		
+		
 		return bloques;
 	}
 	

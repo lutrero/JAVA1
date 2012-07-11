@@ -23,9 +23,11 @@ public class Bar extends Rectangular{
 	}
 	
 	public void resize(boolean big){
-		if (big){
-			anchoExt += 8;
-			setAncho(getAnchoExt() + 16);
+		if (big ){
+			if ( getAncho() < 100){
+				anchoExt += 8;
+				setAncho(getAncho() + 16);
+			}
 		}else{
 			anchoExt = 8;
 			setAncho(50);
@@ -48,26 +50,29 @@ public class Bar extends Rectangular{
 			b.setVx(-250f);
 			b.setVy(-200f);
 		}else if (getCentroX() > b.getCentroX()){
-			for ( int i = (getMinX() + anchoExt); i < getCentroX() ; i++){
-				if ( b.getVx() > 0)
+//			for ( int i = (getMinX() + anchoExt); i < getCentroX() ; i++){
+				if ( b.getVx() > 0){
 					b.deccelX();
-				else
-					b.accelX();
-			}
+					b.invertVx();
+				}else
+					b.deccelX();
+//			}
 			b.setVy(-275f);
 		}else if (getMaxX() - anchoExt > b.getCentroX()){
-			for ( int i = getCentroX(); i < (getMaxX() - anchoExt) ; i++)
-				if(b.getVx() < 0)
+//			for ( int i = getCentroX(); i < (getMaxX() - anchoExt) ; i++)
+				if(b.getVx() < 0){
 					b.deccelX();
-				else
-					b.accelX();
+					b.invertVx();
+				}else
+					b.deccelX();
 			b.setVy(-275f);
-		}else if (b.contains(getMaxX() - anchoExt, getMinY()) || b.getCentroX() > (getMaxX() - anchoExt)){
-			b.setVx(+250f);
-			b.setVy(-200f);
 		}else if (b.contains(getMaxX(), getMinY())){
 			b.setVx(300f);
 			b.setVy(-150f);
+		}
+			else if (b.contains(getMaxX() - anchoExt, getMinY()) || b.getCentroX() > (getMaxX() - anchoExt)){
+			b.setVx(250f);
+			b.setVy(-200f);
 		}
 	}
 }

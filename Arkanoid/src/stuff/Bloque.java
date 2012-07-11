@@ -1,5 +1,9 @@
 package stuff;
 
+import java.awt.Image;
+
+import premios.Premio;
+
 public class Bloque extends Rectangular{
 	
 	private int toques;
@@ -16,6 +20,24 @@ public class Bloque extends Rectangular{
 		this.toques = toques;
 		this.premio = premio;
 	}
+	
+//	@Override
+//	public Image getIcon(){
+//		if (toques == 1){
+//			
+//		}else if(toques == 2){
+//		
+//		}else if (toques == 3){
+//			
+//		}else if (toques == 100){
+//			
+//		}else{
+//			
+//		}
+//		return null;
+//			
+//	}
+	
 	
 	public int getToques() {
 		return toques;

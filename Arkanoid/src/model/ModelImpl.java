@@ -4,12 +4,16 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
+
+import obstaculos.Obstaculos;
+
+import premios.Premio;
 
 import levels.Level1;
 import levels.Levels;
@@ -18,8 +22,6 @@ import stuff.Bala;
 import stuff.Bar;
 import stuff.Bloque;
 import stuff.Bola;
-import stuff.Obstaculos;
-import stuff.Premio;
 import view.View;
 
 public class ModelImpl implements Model {
@@ -94,7 +96,7 @@ public class ModelImpl implements Model {
 			if (b.getMinY() > barra.getMaxY())
 				b.killBall();
 		}
-		Iterator<Bola> it = bolas.iterator();
+		ListIterator<Bola> it = bolas.listIterator();
 		while (it.hasNext()){
 			if(!it.next().isAlive())
 				it.remove();

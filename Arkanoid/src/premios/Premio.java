@@ -1,6 +1,11 @@
-package stuff;
+package premios;
 
 import java.awt.Image;
+
+import stuff.Bola;
+import stuff.Fisica;
+import stuff.PreImage;
+import stuff.Rectangular;
 
 public abstract class Premio extends PreImage implements Fisica{
 	
@@ -8,30 +13,43 @@ public abstract class Premio extends PreImage implements Fisica{
 
 	private int x, y;
 	private float vx, vy;
+	private Bola bola;
 
 	public Premio() {
 		super();
 		x = y = 0;
+		bola = null;
 	}
 
 	public Premio(Image icon) {
 		super(icon);
 		x = y = 0;
 		vx = vy = 0;
+		bola = null;
 	}
 
 	public Premio(String name, int x, int y) {
 		super(name);
 		this.x = x;
 		this.y = y;
+		bola = null;
 	}
 	
-	public Premio(String name, int x, int y, int vy) {
+	public Premio(String name,float vy, Bola b) {
 		super(name);
-		this.x = x;
-		this.y = y;
-		this.vx = 1;
+		this.x = b.getCentroX();
+		this.y = b.getCentroY();
+		this.vx = 0;
 		this.vy = vy;
+		bola = b;
+	}
+	
+	public Bola getBola() {
+		return bola;
+	}
+
+	public void setBola(Bola bola) {
+		this.bola = bola;
 	}
 
 	public int getMaxX(){
@@ -58,10 +76,29 @@ public abstract class Premio extends PreImage implements Fisica{
 		this.y = y;
 	}
 	
+	public boolean intersects(Rectangular r){
+		if (((r.getMaxX() - getMinX()) < (LADO/2 + r.getAncho()/2) && (r.getMaxY() - getMinY()) < (LADO/2 + r.getAlto()/2)) ||
+				((getMaxX() - r.getMinX()) < (LADO/2 + r.getAncho()/2) && (getMaxY() - r.getMinY() < (LADO/2 + r.getAlto()/2))))
+			return true;
+		return false;
+	}
+	
 	@Override
 	public void fisica(float dt){
 		x += vx * dt;
         y += vy * dt;
+	}
+	
+	@Override
+	public void startM() {
+		vx = 0;
+		vy = 150f;
+	}
+
+
+	@Override
+	public void stopM() {
+		vx = vy = 0;
 	}
 
 	@Override
@@ -87,8 +124,5 @@ public abstract class Premio extends PreImage implements Fisica{
 		if (y != other.y)
 			return false;
 		return true;
-	}
-	
-	
-	
+	}	
 }

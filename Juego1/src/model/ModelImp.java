@@ -177,7 +177,7 @@ public class ModelImp implements Model {
 						b.setTouches(b.getTouches() - 1);
 						if(bu.getVx() < 0 )
 							bu.invertVx();
-				}
+					}
 			}
 				
 					
