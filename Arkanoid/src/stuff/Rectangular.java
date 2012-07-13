@@ -83,9 +83,9 @@ public abstract class Rectangular extends PreImage{
 	}
 
 	public boolean intersects(Rectangular r){
-		if (((r.getMaxX() - getMinX()) < (ancho/2 + r.ancho/2) && (r.getMaxY() - getMinY()) < (alto/2 + r.alto/2)) ||
-				((getMaxX() - r.getMinX()) < (ancho/2 + r.ancho/2) && (getMaxY() - r.getMinY() < (alto/2 + r.alto/2))))
-			return true;
+		for ( int i = getMinX(); i <= getMaxX(); i++)
+			for ( int j = getMinY(); j <= getMaxY(); j++)
+				if (r.contains(i, j)) return true;
 		return false;
 	}
 	

@@ -19,6 +19,7 @@ public class TheGameV2 {
 		 Controller controller = new ControllerImpl();
 		 View view = new ViewImpl();
 		 model.setView(view);
+		 model.setController(controller);
 		 controller.setModel(model);
 		 view.setController(controller);
 	     JFrame jf = new JFrame("TheGame--Pakanoid--");

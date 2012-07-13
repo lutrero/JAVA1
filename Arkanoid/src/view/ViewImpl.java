@@ -72,8 +72,6 @@ public class ViewImpl implements View {
 	
 	private class GameListener extends MouseAdapter implements KeyListener{
 		
-		
-
 		public GameListener() {
 			super();
 		}
@@ -81,8 +79,8 @@ public class ViewImpl implements View {
 		@Override
 		public void mouseMoved(MouseEvent e){
 //			controller.setBar(e.getX(), e.getY());
-			barX= e.getX();
-		}
+			barX = e.getX();
+		} 
 		
 		@Override
 		public void keyPressed(KeyEvent e) {

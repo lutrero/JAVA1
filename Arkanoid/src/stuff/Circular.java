@@ -92,21 +92,9 @@ public abstract class Circular extends PreImage{
 	}
 
 	public boolean intersects(Rectangular r){
-		Punto centro = new Punto(centroX, centroY);
-		if(centro.distancia(new Punto(r.getMinX(), r.getMinY())) <= radio ||
-				centro.distancia(new Punto(r.getMinX(), r.getMaxY())) <= radio ||
-				centro.distancia(new Punto(r.getMaxX(), r.getMinY())) <= radio ||
-				centro.distancia(new Punto(r.getMaxX(), r.getMaxY())) <= radio ||
-				centro.distancia(new Punto(r.getCentroX(), r.getMinY())) <= radio ||
-				centro.distancia(new Punto(r.getMinX(), r.getCentroY())) <= radio ||
-				centro.distancia(new Punto(r.getCentroX(), r.getMaxY())) <= radio ||
-				centro.distancia(new Punto(r.getMaxX(), r.getCentroY())) <= radio ||
-				centro.distancia(new Punto(r.getCentroX(), r.getCentroY())) <= radio)
-			return true;
-		if (getCentroX() < r.getMaxX() && getCentroX() > r.getMinX() && ((getMinY() < r.getMaxY() && getMinY()> r.getMaxY()) ||
-				(getMaxY() < r.getMaxY() && getMaxY() > r.getMinY()))) return true;
-		if (getCentroY() < r.getMaxY() && getCentroY() > r.getMinY() && ((getMinX() < r.getMaxX() && getMinX()> r.getMaxX()) ||
-				(getMaxX() < r.getMaxX() && getMaxX() > r.getMinX()))) return true;
+		for ( int i = r.getMinX(); i <= r.getMaxX(); i++)
+			for ( int j = r.getMinY(); j <= r.getMaxY(); j++)
+				if (contains(i, j)) return true;
 		return false;
 	}
 	

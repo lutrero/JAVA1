@@ -24,6 +24,16 @@ public class Bola extends Circular implements Fisica, Accelerates{
 		
 	}
 	
+	
+	
+	public Bola(String name, int centroX, int centroY, int radio, int anchoFrame, int altoFrame, float vx, float vy) {
+		super(name, centroX, centroY, radio);
+		this.vx = vx;
+		this.vy = vy;
+		this.viva = true;
+	}
+
+
 	public boolean isAlive(){
 		return viva;
 	}
@@ -73,22 +83,22 @@ public class Bola extends Circular implements Fisica, Accelerates{
 	}
 
 
-	public static int getANCHOFRAME() {
+	public int getANCHOFRAME() {
 		return ANCHOFRAME;
 	}
 
 
-	public static void setANCHOFRAME(int aNCHOFRAME) {
+	public void setANCHOFRAME(int aNCHOFRAME) {
 		ANCHOFRAME = aNCHOFRAME;
 	}
 
 
-	public static int getALTOFRAME() {
+	public int getALTOFRAME() {
 		return ALTOFRAME;
 	}
 
 
-	public static void setALTOFRAME(int aLTOFRAME) {
+	public void setALTOFRAME(int aLTOFRAME) {
 		ALTOFRAME = aLTOFRAME;
 	}
 

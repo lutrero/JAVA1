@@ -11,6 +11,8 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
+import controller.Controller;
+
 import obstaculos.Obstaculos;
 
 import premios.Premio;
@@ -33,16 +35,13 @@ public class ModelImpl implements Model {
 	private List<Premio> premios;
 	private List<Bala> balas;
 	private View vista;
+	private Controller controller;
 	private Bar barra;
 	
 	private int puntuacion;
 
-	
-	
-	
 	public ModelImpl() {
 		super();
-		// TODO Auto-generated constructor stub
 		bolas = new Vector<Bola>();
 		bloques = null;
 		obs = new Vector<Obstaculos>();
@@ -51,6 +50,7 @@ public class ModelImpl implements Model {
 		levels = new Vector<Levels>();
 		balas = new Vector<Bala>();
 		vista = null;
+		controller = null;
 		barra = new Bar("aBar.png", 50, 480, 50, 10);
 		levels.add(new Level1());
 		bloques = levels.get(0).generateBlocks();
@@ -69,6 +69,9 @@ public class ModelImpl implements Model {
 	private void fisica(float d) {
 		for ( Bola b : bolas)
 			b.fisica(d);
+		for(Premio p : premios){
+			p.fisica(d);
+		}
 		
 	}
 
@@ -81,8 +84,12 @@ public class ModelImpl implements Model {
 				for (Bloque bl : l){
 					if ( bl.getToques() != 0)
 						if (b.intersects(bl)){
+							if (bl.getToques() == 1 && bl.getPremio() != null){
+								premios.add(bl.getPremio());
+								bl.getPremio().setBola(b);
+							}
 							if ( bl.getToques() == 2 ){
-								barra.resize(true);
+//								barra.resize(true);
 								aux = true;
 							}
 							puntuacion += 5;
@@ -96,24 +103,40 @@ public class ModelImpl implements Model {
 			if (b.getMinY() > barra.getMaxY())
 				b.killBall();
 		}
+		for (Premio p : premios){
+			if (p.intersects(barra)){
+				p.presentCached(controller);
+			}
+		}
+		ListIterator<Premio> i = premios.listIterator();
+		Premio p;
+		while (i.hasNext()){
+			p = i.next();
+			if(p.isKill())
+				i.remove();
+			else{
+				p.doAction(controller);
+			}
+		}
+		
 		ListIterator<Bola> it = bolas.listIterator();
 		while (it.hasNext()){
 			if(!it.next().isAlive())
 				it.remove();
 		}
-		if (aux)  bolas.add(new Bola("normalBall.png", 50, 490, 5, 500, 500));
+//		if (aux)  bolas.add(new Bola("normalBall.png", 50, 490, 5, 500, 500));
 	}	
 	
 
 	
 	@Override
 	public void gameCicle() {
-		Timer gameTimer = new Timer(10, new ActionListener() {
+		Timer gameTimer = new Timer(30, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controles();
-				fisica(0.015f);
+				fisica(0.025f);
 				pintar();
 			}
 
@@ -189,5 +212,8 @@ public class ModelImpl implements Model {
 		return puntuacion;
 	}
 
-	
+	@Override
+	public void setController(Controller c) {
+		controller = c;
+	}
 }

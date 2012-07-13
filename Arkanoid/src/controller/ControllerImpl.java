@@ -4,6 +4,8 @@ package controller;
 
 import java.awt.Graphics2D;
 
+import stuff.Bola;
+
 import model.Model;
 
 public class ControllerImpl implements Controller {
@@ -30,6 +32,11 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void setBar(int x, int y) {
 		model.setBarPos(x,y);
+	}
+
+	@Override
+	public void addBola(Bola bola) {
+		model.addBola(bola);
 	}
 
 

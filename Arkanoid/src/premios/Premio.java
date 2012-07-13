@@ -2,6 +2,8 @@ package premios;
 
 import java.awt.Image;
 
+import controller.Controller;
+
 import stuff.Bola;
 import stuff.Fisica;
 import stuff.PreImage;
@@ -14,6 +16,7 @@ public abstract class Premio extends PreImage implements Fisica{
 	private int x, y;
 	private float vx, vy;
 	private Bola bola;
+	private boolean kill;
 
 	public Premio() {
 		super();
@@ -26,6 +29,7 @@ public abstract class Premio extends PreImage implements Fisica{
 		x = y = 0;
 		vx = vy = 0;
 		bola = null;
+		kill = false;
 	}
 
 	public Premio(String name, int x, int y) {
@@ -33,15 +37,17 @@ public abstract class Premio extends PreImage implements Fisica{
 		this.x = x;
 		this.y = y;
 		bola = null;
+		kill = false;
 	}
 	
-	public Premio(String name,float vy, Bola b) {
+	public Premio(String name,float vy) {
 		super(name);
-		this.x = b.getCentroX();
-		this.y = b.getCentroY();
+		this.x = 0;
+		this.y = 0;
 		this.vx = 0;
 		this.vy = vy;
-		bola = b;
+		bola = null;
+		kill = false;
 	}
 	
 	public Bola getBola() {
@@ -50,6 +56,8 @@ public abstract class Premio extends PreImage implements Fisica{
 
 	public void setBola(Bola bola) {
 		this.bola = bola;
+		this.x = this.bola.getCentroX();
+		this.y = this.bola.getCentroY();
 	}
 
 	public int getMaxX(){
@@ -76,10 +84,19 @@ public abstract class Premio extends PreImage implements Fisica{
 		this.y = y;
 	}
 	
+	public void presentCached(Controller c){
+//		TODO
+		kill = true;
+	}
+	
+	public boolean isKill() {
+		return kill;
+	}
+
 	public boolean intersects(Rectangular r){
-		if (((r.getMaxX() - getMinX()) < (LADO/2 + r.getAncho()/2) && (r.getMaxY() - getMinY()) < (LADO/2 + r.getAlto()/2)) ||
-				((getMaxX() - r.getMinX()) < (LADO/2 + r.getAncho()/2) && (getMaxY() - r.getMinY() < (LADO/2 + r.getAlto()/2))))
-			return true;
+		for ( int i = getMinX(); i <= getMaxX(); i++)
+			for ( int j = getMinY(); j <= getMaxY(); j++)
+				if (r.contains(i, j)) return true;
 		return false;
 	}
 	
@@ -124,5 +141,10 @@ public abstract class Premio extends PreImage implements Fisica{
 		if (y != other.y)
 			return false;
 		return true;
+	}
+
+	public void doAction(Controller controller) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

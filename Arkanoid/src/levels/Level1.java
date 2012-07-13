@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import obstaculos.Obstaculos;
+import premios.TriBall;
 
 import stuff.Bloque;
 
@@ -20,6 +21,7 @@ public class Level1 implements Levels {
 		super();
 		nBloques = 300;
 		bloques = new ArrayList<List<Bloque>>();
+		obs = null;
 	}
 
 	@Override
@@ -31,14 +33,15 @@ public class Level1 implements Levels {
 	public List<List<Bloque>> getBlocks() {
 		return bloques;
 	}
+	
 
 	@Override
 	public List<List<Bloque>> generateBlocks() {
-		for(int i = 1; i <= 50; i++){
+		for(int i = 1; i < 50; i++){
 			bloques.add(new ArrayList<Bloque>());
 			for (int j = 1; j <= 6; j++){
-				if(j == 10 || j == 1)
-					bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 1, null));
+				if(j == 6 || j == 1)
+					bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 1, new TriBall("Nebulosa.jpg", 150f)));
 				else if ( j == 5)
 					bloques.get(i-1).add(new Bloque("Nebulosa.jpg", i*10, j*10, 10, 10, 2, null));
 				else
@@ -53,6 +56,11 @@ public class Level1 implements Levels {
 	@Override
 	public void downBlock() {
 		nBloques--;
+	}
+
+	@Override
+	public List<Obstaculos> getObstaculos() {
+		return obs;
 	}
 
 }
