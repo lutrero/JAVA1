@@ -1,6 +1,8 @@
 package stuff;
 
 import java.awt.Image;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 public abstract class Circular extends PreImage{
 	
@@ -92,10 +94,13 @@ public abstract class Circular extends PreImage{
 	}
 
 	public boolean intersects(Rectangular r){
-		for ( int i = r.getMinX(); i <= r.getMaxX(); i++)
-			for ( int j = r.getMinY(); j <= r.getMaxY(); j++)
-				if (contains(i, j)) return true;
-		return false;
+//		for ( int i = r.getMinX(); i <= r.getMaxX(); i++)
+//			for ( int j = r.getMinY(); j <= r.getMaxY(); j++)
+//				if (contains(i, j)) return true;
+//		return false;
+		Ellipse2D.Double e1 = new Ellipse2D.Double(getMinX(), getMinY(), radio*2, radio*2);
+		Rectangle2D.Double r1 = new Rectangle2D.Double(r.getMinX(), r.getMinY(), r.getAncho(), r.getAlto());
+		return e1.intersects(r1);
 	}
 	
 	public boolean contains(int x, int y){

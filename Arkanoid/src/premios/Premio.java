@@ -1,6 +1,7 @@
 package premios;
 
 import java.awt.Image;
+import java.awt.geom.Rectangle2D;
 
 import controller.Controller;
 
@@ -17,6 +18,7 @@ public abstract class Premio extends PreImage implements Fisica{
 	private float vx, vy;
 	private Bola bola;
 	private boolean kill;
+	private long startTime;
 
 	public Premio() {
 		super();
@@ -86,18 +88,24 @@ public abstract class Premio extends PreImage implements Fisica{
 	
 	public void presentCached(Controller c){
 //		TODO
-		kill = true;
+//		kill = true;
+		startTime = System.nanoTime();
 	}
 	
 	public boolean isKill() {
 		return kill;
 	}
+	
+	public void setKill(boolean kill) {
+		this.kill = kill;
+	}
 
 	public boolean intersects(Rectangular r){
-		for ( int i = getMinX(); i <= getMaxX(); i++)
-			for ( int j = getMinY(); j <= getMaxY(); j++)
-				if (r.contains(i, j)) return true;
-		return false;
+//		for ( int i = getMinX(); i <= getMaxX(); i++)
+//			for ( int j = getMinY(); j <= getMaxY(); j++)
+//				if (r.contains(i, j)) return true;
+//		return false;
+		return new Rectangle2D.Double(getMinX(), getMinY(), LADO, LADO).intersects(new Rectangle2D.Double(r.getMinX(), r.getMinY(), r.getAncho(), r.getAlto()));
 	}
 	
 	@Override
@@ -144,7 +152,10 @@ public abstract class Premio extends PreImage implements Fisica{
 	}
 
 	public void doAction(Controller controller) {
-		// TODO Auto-generated method stub
-		
+		long actualTime = System.nanoTime();
+		float dt = (actualTime - startTime) / 1000000000f;
+		if ( dt > 30){
+			kill = true;
+		}
 	}	
 }

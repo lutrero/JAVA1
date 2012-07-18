@@ -43,7 +43,6 @@ public class ModelImpl implements Model {
 	public ModelImpl() {
 		super();
 		bolas = new Vector<Bola>();
-		bloques = null;
 		obs = new Vector<Obstaculos>();
 		puntuacion = 0;
 		premios = new Vector<Premio>();
@@ -76,7 +75,6 @@ public class ModelImpl implements Model {
 	}
 
 	private void controles() {
-		boolean aux = false;
 		barra.setCentroX(vista.getBarX());
 		for (Bola b : bolas){
 			if (b.isAlive())
@@ -87,10 +85,6 @@ public class ModelImpl implements Model {
 							if (bl.getToques() == 1 && bl.getPremio() != null){
 								premios.add(bl.getPremio());
 								bl.getPremio().setBola(b);
-							}
-							if ( bl.getToques() == 2 ){
-//								barra.resize(true);
-								aux = true;
 							}
 							puntuacion += 5;
 							bl.reboteBola(b);
@@ -124,7 +118,6 @@ public class ModelImpl implements Model {
 			if(!it.next().isAlive())
 				it.remove();
 		}
-//		if (aux)  bolas.add(new Bola("normalBall.png", 50, 490, 5, 500, 500));
 	}	
 	
 

@@ -1,6 +1,7 @@
 package stuff;
 
 import java.awt.Image;
+import java.awt.geom.Rectangle2D;
 
 public abstract class Rectangular extends PreImage{
 
@@ -83,10 +84,13 @@ public abstract class Rectangular extends PreImage{
 	}
 
 	public boolean intersects(Rectangular r){
-		for ( int i = getMinX(); i <= getMaxX(); i++)
-			for ( int j = getMinY(); j <= getMaxY(); j++)
-				if (r.contains(i, j)) return true;
-		return false;
+//		for ( int i = getMinX(); i <= getMaxX(); i++)
+//			for ( int j = getMinY(); j <= getMaxY(); j++)
+//				if (r.contains(i, j)) return true;
+//		return false;
+	Rectangle2D.Double r1 = new Rectangle2D.Double(getMinX(), getMinY(), ancho, alto);
+	Rectangle2D.Double r2 = new Rectangle2D.Double(r.getMinX(), r.getMinY(), r.ancho, r.alto);
+	return r1.intersects(r2);
 	}
 	
 	public boolean contains(int x, int y){

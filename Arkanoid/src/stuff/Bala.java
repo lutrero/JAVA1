@@ -1,35 +1,34 @@
 package stuff;
 
-public class Bala extends Circular implements Fisica, Accelerates {
+public class Bala extends Circular implements Fisica {
 
-	@Override
-	public void accelX() {
-		// TODO Auto-generated method stub
+	private float vy;
+	private boolean viva;
+	
 
+	public Bala() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void accelY() {
-		// TODO Auto-generated method stub
-
+	public Bala(String name, int centroX, int centroY, int radio) {
+		super(name, centroX, centroY, radio);
+		vy = 250f;
+		viva = true;
 	}
 
-	@Override
-	public void deccelX() {
-		// TODO Auto-generated method stub
-
+	public boolean isViva() {
+		return viva;
 	}
 
-	@Override
-	public void deccelY() {
-		// TODO Auto-generated method stub
-
+	public void setViva(boolean viva) {
+		this.viva = viva;
 	}
 
 	@Override
 	public void fisica(float dt) {
-		// TODO Auto-generated method stub
-
+		super.incrementaY((int)(vy * dt));
+		if (getMinY() <= 0) viva = false;
 	}
 
 	@Override
