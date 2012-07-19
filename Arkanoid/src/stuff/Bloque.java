@@ -21,22 +21,22 @@ public class Bloque extends Rectangular{
 		this.premio = premio;
 	}
 	
-//	@Override
-//	public Image getIcon(){
-//		if (toques == 1){
-//			
-//		}else if(toques == 2){
-//		
-//		}else if (toques == 3){
-//			
-//		}else if (toques == 100){
-//			
-//		}else{
-//			
-//		}
-//		return null;
-//			
-//	}
+	@Override
+	public Image getIcon(){
+		if (toques == 1){
+			super.setIcon("block1.png");
+		}else if(toques == 2){
+			super.setIcon("block2.png");
+		}else if (toques == 3){
+			super.setIcon("block3.png");
+		}else if (toques == 100){
+			super.setIcon("metalblock1.png");
+		}else{
+			
+		}
+		return super.getIcon();
+			
+	}
 	
 	
 	public int getToques() {

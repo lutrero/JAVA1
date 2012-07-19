@@ -16,11 +16,11 @@ public class TriBall extends Premio{
 
 	@Override
 	public void presentCached(Controller c) {
-//		super.presentCached(c);
+		super.presentCached(c);
 		super.setKill(true);
-		c.addBola(new Bola("normalBall.png", getBola().getCentroX(), getBola().getCentroY(), getBola().getRadio(), getBola().getANCHOFRAME(), getBola().getALTOFRAME(), 200f, -150f));
-		c.addBola(new Bola("normalBall.png", getBola().getCentroX(), getBola().getCentroY(), getBola().getRadio(), getBola().getANCHOFRAME(), getBola().getALTOFRAME(), 150f, -300f));
-		c.addBola(new Bola("normalBall.png", getBola().getCentroX(), getBola().getCentroY(), getBola().getRadio(), getBola().getANCHOFRAME(), getBola().getALTOFRAME(), -200f, 100f));
+		c.addBola(new Bola("bullet.png", getBola().getCentroX(), getBola().getCentroY(), getBola().getRadio(), getBola().getANCHOFRAME(), getBola().getALTOFRAME(), 200f, -150f));
+		c.addBola(new Bola("bullet.png", getBola().getCentroX(), getBola().getCentroY(), getBola().getRadio(), getBola().getANCHOFRAME(), getBola().getALTOFRAME(), 150f, -300f));
+		c.addBola(new Bola("bullet.png", getBola().getCentroX(), getBola().getCentroY(), getBola().getRadio(), getBola().getANCHOFRAME(), getBola().getALTOFRAME(), -200f, 100f));
 	}	
 
 }

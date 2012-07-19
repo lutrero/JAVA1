@@ -23,8 +23,6 @@ public interface Model {
 
 	public void gameCicle();
 	
-	public void  addBola();
-	
 	public void addBola(Bola b);
 	
 	public void nextLevel();
@@ -42,6 +40,18 @@ public interface Model {
 	public void setBarPos(int x, int y);
 
 	public int getPuntuacion();
+
+	public int getBarMinX();
+
+	public int getBarMaxX();
+
+	public int getBarY();
+
+	public void startMoving();
+
+	public void liveUp();
+
+	public void bigBall();
 	
 	
 }

@@ -7,17 +7,17 @@ public class Bola extends Circular implements Fisica, Accelerates{
 	private static int ANCHOFRAME, ALTOFRAME;
 
 	public Bola() {
-		super();
+		super("", 250, 100, 5);
 		vx = vy = 0;
 		viva = true;
-		ANCHOFRAME = ALTOFRAME = 0;
+		ANCHOFRAME = ALTOFRAME = 500;
 	}
 
 
 	public Bola(String name, int centroX, int centroY, int radio, int anchoFrame, int altoFrame) {
 		super(name, centroX, centroY, radio);
-		vx = 100f;
-		vy = -300f;
+		vx = 0f;
+		vy = 0;
 		viva = true;
 		ALTOFRAME = altoFrame;
 		ANCHOFRAME = anchoFrame;
@@ -170,8 +170,8 @@ public class Bola extends Circular implements Fisica, Accelerates{
 
 	@Override
 	public void startM() {
-		vx = 150f;
-		vy = -275f;
+		vx = 100f;
+		vy = -300f;
 	}
 
 

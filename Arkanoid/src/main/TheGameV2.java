@@ -25,7 +25,6 @@ public class TheGameV2 {
 	     JFrame jf = new JFrame("TheGame--Pakanoid--");
 	     jf.addWindowListener(new WindowAdapter() {
 	             public void windowClosing(WindowEvent e) {
-	            	 System.out.println(model.getPuntuacion());
 	                 System.exit(0);
 	             }
 	            });

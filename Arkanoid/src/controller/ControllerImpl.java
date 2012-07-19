@@ -4,6 +4,7 @@ package controller;
 
 import java.awt.Graphics2D;
 
+import stuff.Bala;
 import stuff.Bola;
 
 import model.Model;
@@ -37,6 +38,41 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void addBola(Bola bola) {
 		model.addBola(bola);
+	}
+
+	@Override
+	public void addBala(Bala bala) {
+		model.addBala(bala);
+	}
+
+	@Override
+	public int getBarMinX() {
+		return model.getBarMinX();
+	}
+
+	@Override
+	public int getBarMaxX() {
+		return model.getBarMaxX();
+	}
+
+	@Override
+	public int getBarY() {
+		return model.getBarY();
+	}
+
+	@Override
+	public void startMoving() {
+		model.startMoving();
+	}
+
+	@Override
+	public void liveUp() {
+		model.liveUp();
+	}
+
+	@Override
+	public void bigBall() {
+		model.bigBall();
 	}
 
 

@@ -13,7 +13,7 @@ public class Bala extends Circular implements Fisica {
 
 	public Bala(String name, int centroX, int centroY, int radio) {
 		super(name, centroX, centroY, radio);
-		vy = 250f;
+		vy = -250f;
 		viva = true;
 	}
 

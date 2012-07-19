@@ -50,6 +50,7 @@ public abstract class Premio extends PreImage implements Fisica{
 		this.vy = vy;
 		bola = null;
 		kill = false;
+		startTime = 0;
 	}
 	
 	public Bola getBola() {
@@ -152,10 +153,19 @@ public abstract class Premio extends PreImage implements Fisica{
 	}
 
 	public void doAction(Controller controller) {
+		if(startTime != 0){
 		long actualTime = System.nanoTime();
 		float dt = (actualTime - startTime) / 1000000000f;
 		if ( dt > 30){
 			kill = true;
 		}
+		System.out.println(actualTime);
+		System.out.println(startTime);
+		System.out.println(dt);
+		}
+	}
+
+	public long getStartTime() {
+		return startTime;
 	}	
 }

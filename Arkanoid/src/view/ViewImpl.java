@@ -57,7 +57,9 @@ public class ViewImpl implements View {
 
 		public GamePanel() {
 			super();
-			addMouseMotionListener(new GameListener());
+			GameListener g = new GameListener();
+			addMouseMotionListener(g);
+			addMouseListener(g);
 			setPreferredSize(new Dimension(500, 500));
 //			addKeyListener(new GameListener());
 		}
@@ -80,7 +82,19 @@ public class ViewImpl implements View {
 		public void mouseMoved(MouseEvent e){
 //			controller.setBar(e.getX(), e.getY());
 			barX = e.getX();
-		} 
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e){
+			if(e.getButton() == 1){
+				controller.startMoving();
+			}
+		}
+		
+		@Override
+		public void mouseDragged(MouseEvent e){
+			barX = e.getX();
+		}
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
