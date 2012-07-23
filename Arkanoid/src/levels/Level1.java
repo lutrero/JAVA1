@@ -37,20 +37,20 @@ public class Level1 implements Levels {
 
 	@Override
 	public List<List<Bloque>> generateBlocks() {
-		for(int i = 1; i < 50; i++){
+		for(int i = 2; i < 16; i++){
 			bloques.add(new ArrayList<Bloque>());
-			for (int j = 4; j <= 10; j++){
+			for (int j = 4; j <= 8; j++){
 				if(j == 10 || j == 4){
-					if (i == 10 || i == 20 || i == 30 || i == 40)
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 1, new MachineGun("Machinegun.png", 150f)));
-					else if (i == 25 || i == 35)
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 1, new TriBall("3ball.png", 150f)));
+					if (i == 10 || i == 6)
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 1, new MachineGun("Machinegun.png", 150f)));
+					else if (i == 10 || i == 12)
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 1, new TriBall("3ball.png", 150f)));
 					else
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 1, null));
-				}else if ( j == 9)
-					bloques.get(i-1).add(new Bloque("Nebulosa.jpg", i*10, j*10, 10, 10, 2, null));
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 1, null));
+				}else if ( j == 8)
+					bloques.get(i-2).add(new Bloque("Nebulosa.jpg", i*30, j*20, 30, 20, 2, null));
 				else
-					bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 3, null));
+					bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 3, null));
 			}
 		}
 		return bloques;

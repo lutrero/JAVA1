@@ -37,20 +37,20 @@ public class Level2 implements Levels{
 
 	@Override
 	public List<List<Bloque>> generateBlocks() {
-		for (int i = 1 ; i < 50 ; i++){
+		for (int i = 2 ; i < 16 ; i++){
 			bloques.add(new LinkedList<Bloque>());
 			for ( int j = 4 ; j < 10 ; j++){
-				if ( j != 7 && i != 25 && j != 6 && i != 26){
-					if ( j == 8 && ( i == 15 || i == 40))
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 3, new BigBall("bigball.png", 150f)));
-					else if (j == 4 && i == 24)
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 3, new LiveUp("liveup.png", 150f)));
-					else if (j == 9 && (i == 32 || i == 33 || i == 34) )
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 3, new MachineGun("Machinegun.png", 150f)));
+				if ( j != 7 && i != 9 && j != 6 && i != 8){
+					if ( j == 8 && ( i == 15 || i == 4))
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 3, new BigBall("bigball.png", 150f)));
+					else if (j == 4 && i == 14)
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 3, new LiveUp("liveup.png", 150f)));
+					else if (j == 9 && (i == 12 || i == 13 || i == 14) )
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 3, new MachineGun("Machinegun.png", 150f)));
 					else if (j == 8 && i == 4)
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 3, new TriBall("3ball.png", 150f)));
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 3, new TriBall("3ball.png", 150f)));
 					else
-						bloques.get(i-1).add(new Bloque("block1.png", i*10, j*10, 10, 10, 3, null));
+						bloques.get(i-2).add(new Bloque("block1.png", i*30, j*20, 30, 20, 3, null));
 				}
 			}
 		}

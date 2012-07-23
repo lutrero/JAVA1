@@ -159,9 +159,6 @@ public abstract class Premio extends PreImage implements Fisica{
 		if ( dt > 30){
 			kill = true;
 		}
-		System.out.println(actualTime);
-		System.out.println(startTime);
-		System.out.println(dt);
 		}
 	}
 

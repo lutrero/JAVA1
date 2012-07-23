@@ -83,23 +83,30 @@ public class Bloque extends Rectangular{
 	}
 	public void reboteBola(Bola b) {
 		// TODO Auto-generated method stub
-		if(b.contains(getCentroX(), getMaxY())){
+		boolean aux = true;
+//		if(contains(b.getCentroX(), b.getMinY()) || contains(b.getCentroX(), b.getMaxY()) || contains(b.getMaxX(), b.getCentroY()) || contains(b.getMinX(), b.getCentroY()))
+		if(b.getCentroY() >= getMaxY() && b.getMinY() <= getMaxY()
+		&& contains(b.getCentroX(), b.getMinY()) ){
 			toques--;
 			if ( b.getVy() < 0)
 				b.invertVy();
-		}else if ( b.contains(getCentroX(), getMinY())){
+		}else if (b.getCentroY() <= getMinY() && b.getMaxY() >= getMinY()
+				&& contains(b.getCentroX(), b.getMaxY())){
 			toques--;
 			if (b.getVy() > 0)
 				b.invertVy();
-		}else if( b.contains(getMinX(), getCentroY()) ){
+		}else if (contains(b.getCentroX(), b.getMinY()) || contains(b.getCentroX(), b.getMaxY())){b.invertVy(); toques--; aux = false;}
+		if( b.getCentroX() <= getMinX() && b.getMaxX() >= getMinX() 
+				&& contains(b.getMaxX(), b.getCentroY())){
 			toques--;
 			if (b.getVx() > 0)
 				b.invertVx();
-		}else if( b.contains(getMaxX(), getCentroY())){
+		}else if(b.getCentroX() >= getMaxX() && b.getMinX() >= getMaxX() 
+				&& contains(b.getMinX(), b.getCentroY())){
 			toques--;
 			if(b.getVx() < 0 )
 				b.invertVx();
-		}
+		}else if ( contains(b.getMaxX(), b.getCentroY()) || contains(b.getMinX(), b.getCentroY())){b.invertVx(); if (aux) toques--; }
 	}
 	
 }

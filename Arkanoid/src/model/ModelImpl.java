@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Vector;
@@ -106,7 +107,7 @@ public class ModelImpl implements Model {
 				nBloques = 0;
 			for(List<Bloque> l : bloques)
 				for (Bloque bl : l){
-					if ( bl.getToques() != 0){
+					if ( bl.getToques() > 0){
 						if (b.intersects(bl)){
 							if (bl.getToques() == 1){
 								if( bl.getPremio() != null){
@@ -124,8 +125,8 @@ public class ModelImpl implements Model {
 			if ( b.intersects(barra)){
 				b.invertVy();
 				barra.propulsionBola(b);
-			}
-			if (b.getMinY() > barra.getMaxY())
+			}else
+			if (b.getCentroY() > barra.getMaxY())
 				b.killBall();
 		}
 		
@@ -223,10 +224,10 @@ public class ModelImpl implements Model {
 			itr.remove();
 		}
 		int pos = levels.lastIndexOf(currentLevel) ;
-		if ( pos == levels.size())
+		if ( pos  == levels.size())
 			currentLevel = null;
 		else{
-			ListIterator<Levels> l = levels.listIterator(pos + 1);
+			Iterator<Levels> l = levels.listIterator(pos + 1);
 			if (l.hasNext()) {
 			currentLevel = l.next();
 			bloques = currentLevel.generateBlocks();
@@ -257,8 +258,9 @@ public class ModelImpl implements Model {
 		paintVidas(g);
 		paintScore(g);
 		}else{
-			g.drawImage(new ImageIcon(getClass().getResource("/images/girlGameOver.jpg")).getImage(),0,0, 500 + 20, 500 + 30 ,null);
-			g.drawImage(new ImageIcon(getClass().getResource("/images/GameOver.png")).getImage(), 170, 170, 150, 150 ,null);
+			g.drawImage(new ImageIcon(getClass().getResource("/images/gameover2.png")).getImage(),0,0, 500 + 20, 500 + 30 ,null);
+//			g.drawImage(new ImageIcon(getClass().getResource("/images/girlGameOver.jpg")).getImage(),0,0, 500 + 20, 500 + 30 ,null);
+//			g.drawImage(new ImageIcon(getClass().getResource("/images/GameOver.png")).getImage(), 170, 170, 150, 150 ,null);
 			g.setColor(Color.WHITE);
 			g.drawString("PUNTUACION ", 400, 50);
 			g.drawString( "" + puntuacion, 400, 63);
